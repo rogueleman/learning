@@ -1,0 +1,24 @@
+package com.leman.core.api.dictionar.server.conf;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+
+import com.leman.core.data.dictionar.spring.config.AnagramDatabaseConfiguration;
+
+@Configuration
+@ComponentScan(basePackages = { "com.leman.core.api.dictionar.server.anagram.services", "com.leman.core.api.dictionar.server.anagram.resources"}, excludeFilters = { @Filter(type = FilterType.ANNOTATION, value = Configuration.class) })
+@PropertySource({"file:/etc/emv/anagram-core/global.properties"})
+@Import({AnagramDatabaseConfiguration.class})
+public class JerseySpringConf {
+	
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
+}

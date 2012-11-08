@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>dictionar-core-api</artifactId>
+	<name>DictionarCoreApi</name>
+	<packaging>pom</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+
+    <parent>
+    	<groupId>com.leman</groupId>
+    	<artifactId>dictionar-global</artifactId>
+    	<version>0.0.1</version>
+    </parent>
+
+	<modules>
+		<module>dictionar-core-api-client</module>
+		<module>dictionar-core-api-common</module>
+		<module>dictionar-core-api-server</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.emailvision</groupId>
+			<artifactId>emv-commons-api-rest</artifactId>
+			<version>0.5-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>crypto</artifactId>
+					<groupId>com.emailvision</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>emv-commons-pool</artifactId>
+					<groupId>com.emailvision</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>emv-commons-i18n</artifactId>
+					<groupId>com.emailvision</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>emv-commons-properties</artifactId>
+					<groupId>com.emailvision</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+</project>
