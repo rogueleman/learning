@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Build-Jdk: 1.7.0_04
+Built-By: ggutau
+Build-Version: 0.1-SNAPSHOT
+Build-Revision: 0
+Project-Name: dictionar-data
+Created-By: Maven Integration for Eclipse
+
