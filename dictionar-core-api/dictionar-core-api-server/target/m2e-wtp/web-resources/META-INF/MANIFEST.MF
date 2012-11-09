@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Built-By: ggutau
-Build-Jdk: 1.7.0_04
-Build-Revision: 0
-Build-Version: 0.0.1-SNAPSHOT
-Created-By: Maven Integration for Eclipse
-Project-Name: dictionar-core
-

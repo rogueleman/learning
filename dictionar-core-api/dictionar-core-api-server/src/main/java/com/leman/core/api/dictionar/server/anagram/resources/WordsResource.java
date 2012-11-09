@@ -6,7 +6,7 @@ import static com.emailvision.commons.api.restful.utils.GenericResourcePath.QUER
 import static com.emailvision.commons.api.restful.utils.GenericResourcePath.QUERY_PARAM_SEARCH;
 import static com.emailvision.commons.api.restful.utils.GenericResourcePath.QUERY_PARAM_SORT;
 import static com.emailvision.commons.http.utils.ParamChecker.isBlankListThrowIllegalArgumentException;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.IMAGE_ARCHIVE_RESOURCE_PATH;
+import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORD_ARCHIVE_RESOURCE_PATH;
 import static java.text.MessageFormat.format;
 
 import java.util.List;
@@ -33,12 +33,12 @@ import com.sun.jersey.spi.resource.Singleton;
 
 @Component
 @Singleton
-@Path(IMAGE_ARCHIVE_RESOURCE_PATH)
+@Path(WORD_ARCHIVE_RESOURCE_PATH)
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
 public class WordsResource extends AbstractRestFulResource {
 
-	private final IWordsService imageService;
+	private final IWordsService wordsService;
 
 	private static final String PAGE_NUMBER_REGEX_PATH = "{pageNumber: [0-9]+}";
 
@@ -50,31 +50,30 @@ public class WordsResource extends AbstractRestFulResource {
 	
 	
 	@Autowired
-	public WordsResource(final IWordsService imageService) {
-		this.imageService = imageService;
+	public WordsResource(final IWordsService wordsService) {
+		this.wordsService = wordsService;
 	}
 
-	@GET
-	public Response getImages(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_SEARCH) final String search, @QueryParam(QUERY_PARAM_ORDER) final String order, @QueryParam(QUERY_PARAM_SORT) final Sort sort, @QueryParam(QUERY_PARAM_MANAGER_IDS) final List<Long> managerIds) {
-		isBlankListThrowIllegalArgumentException(managerIds, format(ERROR_MISSING_PARAMETER, "managerIds"));
-		final List<AnagramEntity> imageEntities = imageService.getArchives(search, order, sort, managerIds);
-		return buildGetResponse(requestHeader, new GenericEntity<List<AnagramEntity>>(imageEntities){});
-	}
+//	@GET
+//	public Response getImages(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_SEARCH) final String search, @QueryParam(QUERY_PARAM_ORDER) final String order, @QueryParam(QUERY_PARAM_SORT) final Sort sort) {
+//		final List<AnagramEntity> anagramEntities = wordsService.getArchives(search, order, sort);
+//		return buildGetResponse(requestHeader, new GenericEntity<List<AnagramEntity>>(anagramEntities){});
+//	}
 
-	@GET
-	@Path(PAGE_NUMBER_REGEX_PATH)
-	public Response getImageByPageNumber(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @PathParam(PAGE_NUMBER) final Integer pageNumber, @QueryParam(QUERY_PARAM_SEARCH) final String search, @QueryParam(QUERY_PARAM_ORDER) final String order, @QueryParam(QUERY_PARAM_SORT) final Sort sort, @QueryParam(QUERY_PARAM_MANAGER_IDS) final List<Long> managerIds) {
-		isBlankListThrowIllegalArgumentException(managerIds, format(ERROR_MISSING_PARAMETER, "managerIds"));
-		final List<AnagramEntity> imageEntities = imageService.getArchives(pageNumber, search, order, sort, managerIds);
-        return buildGetResponse(requestHeader, new GenericEntity<List<AnagramEntity>>(imageEntities){});
-	}
-
-	@GET
-	@Path(PAGE_NUMBER_AND_ITEM_REGEX_PATH)
-	public Response getImageByPageNumberAndNbItemPerPage(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @PathParam(PAGE_NUMBER) final Integer pageNumber, @PathParam(NB_ITEM_PER_PAGE) final Integer nbItemPerPage, @QueryParam(QUERY_PARAM_SEARCH) final String search, @QueryParam(QUERY_PARAM_ORDER) final String order, @QueryParam(QUERY_PARAM_SORT) final Sort sort, @QueryParam(QUERY_PARAM_MANAGER_IDS) final List<Long> managerIds) {
-		isBlankListThrowIllegalArgumentException(managerIds, format(ERROR_MISSING_PARAMETER, "managerIds"));
-		final List<AnagramEntity> imageEntities = imageService.getArchives(pageNumber, nbItemPerPage, search, order, sort, managerIds);
-		return buildGetResponse(requestHeader, new GenericEntity<List<AnagramEntity>>(imageEntities){});
-	}
+//	@GET
+//	@Path(PAGE_NUMBER_REGEX_PATH)
+//	public Response getImageByPageNumber(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @PathParam(PAGE_NUMBER) final Integer pageNumber, @QueryParam(QUERY_PARAM_SEARCH) final String search, @QueryParam(QUERY_PARAM_ORDER) final String order, @QueryParam(QUERY_PARAM_SORT) final Sort sort, @QueryParam(QUERY_PARAM_MANAGER_IDS) final List<Long> managerIds) {
+//		isBlankListThrowIllegalArgumentException(managerIds, format(ERROR_MISSING_PARAMETER, "managerIds"));
+//		final List<AnagramEntity> imageEntities = wordsService.getArchives(pageNumber, search, order, sort, managerIds);
+//        return buildGetResponse(requestHeader, new GenericEntity<List<AnagramEntity>>(imageEntities){});
+//	}
+//
+//	@GET
+//	@Path(PAGE_NUMBER_AND_ITEM_REGEX_PATH)
+//	public Response getImageByPageNumberAndNbItemPerPage(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @PathParam(PAGE_NUMBER) final Integer pageNumber, @PathParam(NB_ITEM_PER_PAGE) final Integer nbItemPerPage, @QueryParam(QUERY_PARAM_SEARCH) final String search, @QueryParam(QUERY_PARAM_ORDER) final String order, @QueryParam(QUERY_PARAM_SORT) final Sort sort, @QueryParam(QUERY_PARAM_MANAGER_IDS) final List<Long> managerIds) {
+//		isBlankListThrowIllegalArgumentException(managerIds, format(ERROR_MISSING_PARAMETER, "managerIds"));
+//		final List<AnagramEntity> imageEntities = wordsService.getArchives(pageNumber, nbItemPerPage, search, order, sort, managerIds);
+//		return buildGetResponse(requestHeader, new GenericEntity<List<AnagramEntity>>(imageEntities){});
+//	}
 
 }

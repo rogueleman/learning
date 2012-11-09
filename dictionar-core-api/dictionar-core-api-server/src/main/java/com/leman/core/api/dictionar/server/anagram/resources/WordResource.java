@@ -61,11 +61,10 @@ public class WordResource extends AbstractRestFulResource {
 	}
 	
 	@GET
-	@Path(WORD_ID_REGEX_PATH)
-	public Response getWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @PathParam(WORD_ID_PATH) final Long wordId) {
+	public Response getWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader) {
 		return buildGetResponse(requestHeader, wordService.getAnagramEntity());
 	}
-	
+
 //	@POST
 //	@Consumes(MediaType.MULTIPART_FORM_DATA)
 //	public Response postImage(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_MANAGER_ID) final Long managerId, 

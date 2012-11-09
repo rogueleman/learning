@@ -44,10 +44,16 @@ public class WordsService implements IWordsService {
 			LOG.debug("Entering getAnagramEntity ..... ");
 		}
 		boolean test=false;
-		Long id = getRandomWordId();
-		do{
+		
+		Long id;
+		
+		do {
+			id = getRandomWordId() + 1;
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("generated id: " + id);
+			}
 			test = ! itsAGoodWord(id);
-		}while (test);
+		} while (test);
 
 		final Words word = wordsRepository.load(id);
 		return convertWordsToAnagramEntity(word);
@@ -128,26 +134,6 @@ public class WordsService implements IWordsService {
 //		}
 //
 //		return imageEntities;
-//	}
-//
-//	/**
-//	 * 
-//	 * @param image
-//	 * @return
-//	 */
-//	private AnagramEntity convertImageToImageEntity(final Image image) {
-//		return new AnagramEntity(image.getId(), image.getName(), image.getDescription(), image.getUrl(), image.getUrlThumb(), image.getSize(), image.getHeight(), image.getWidth(), 
-//				image.getDateCreation(), image.getDateModification(), image.getDateLastUse(), image.getManagerId());
-//	}
-//
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public AnagramEntity getImage(final List<Long> managerId, final Long imageId) {
-//		final Image image = imageRepository.findByIdAndManagerId(managerId, imageId);
-//		return convertImageToImageEntity(image);
 //	}
 //
 //	/**

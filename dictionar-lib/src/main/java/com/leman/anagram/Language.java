@@ -7,7 +7,7 @@ import java.util.List;
 
 public enum Language {
 	
-	us(1, "English (US)", "en", "US", false, false),
+	us(0, "English (US)", "en", "US", false, false),
 	ro(1, "Romana", "ro", "RO", false, false),
 	en(2, "English (UK)", "en", "GB", false, false),
 	fr(3, "Français", "fr", "FR", false, false),
