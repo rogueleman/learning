@@ -10,8 +10,9 @@ public abstract class AbstractDictionarCoreApiClient {
 
 	public static final String PROPS_KEY_DICTIONAR_API_SERVER_FORMAT = "dictionar.api.url.format";
 	public static final String DEFAULT_DICTIONAR_API_SERVER_FORMAT = "https://{0}/dictionar-core"; 
-	public static final String PROPS_KEY_AUTH_API_CLIENT_TIMEOUT = "core.api.client.timeout";
-	public static final String PROPS_KEY_AUTH_API_CLIENT_DEBUG = "core.api.client.debug";
+	public static final String PROPS_KEY_DICTIONAR_API_CLIENT_TIMEOUT = "core.api.client.timeout";
+	public static final String PROPS_KEY_DICTIONAR_API_CLIENT_DEBUG = "core.api.client.debug";
+	public static final String PROPS_KEY_DICTIONAR_API_HOST = "dictionar.api.host";
 	
 	protected final String dictionarCoreApiServerFormat;
 	protected final Client client;
