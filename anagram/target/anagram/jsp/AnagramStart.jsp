@@ -20,21 +20,6 @@
   	
 	<script type="text/javascript" charset="utf-8">
 		
-		var hostName = null;
-
-		function getHostName() {
-			if (hostName==undefined ||  hostName=="" || hostName==null){
-				return "";
-			} else{
-				return 'https://'+hostName;
-			}
-		}
-	
-		function setHostName(value) {
-			hostName = value;
-			rePost = true;
-		}
-
 /* 		function changePassword(){
 			$.post(
 				'./../ChangePwdServlet',
@@ -89,9 +74,10 @@
 	</script>
 	</head>
 
-	<body id="main">	
+	<body id="main">
+	Body	
 		<div id="container">
-			<form name="AnagramStartServlet" method="get" action="/AnagramStartServlet.do">
+			<form name="AnagramStartServlet">
 			
 				<div class="containerTop"></div>
 				<div class="containerBackground">
@@ -122,7 +108,7 @@
 					</div>
 				</div>
 			</form>
-		</div>
+		</div> 
 		
 	</body>
 </html>

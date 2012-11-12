@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClient;
 import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiException;
 import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
 
+@WebServlet("/AnagramStartServlet")
 public class AnagramStartServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 93312596895596119L;
@@ -64,7 +66,7 @@ public class AnagramStartServlet extends HttpServlet {
     }
     
     @Override
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
     	if (LOG.isDebugEnabled()) {
     		LOG.debug("Enternig doGet AnagramStartServlet");
     	}
@@ -80,13 +82,21 @@ public class AnagramStartServlet extends HttpServlet {
 
     	request.setAttribute("word", anagramEntity.getWord());
     	
-    	final StringBuilder url = new StringBuilder("../anagram/jsp/AnagramStart.jsp");
-
     	if (LOG.isDebugEnabled()) {
-    		LOG.debug(format("redirect url : \"{0}\"", url));
+    		LOG.debug("anagramEntity.getWord(): " + anagramEntity.getWord());
     	}
     	
-    	resp.sendRedirect(url.toString());
+    	final String url = new String("/jsp/AnagramStart.jsp");
+
+    	if (LOG.isDebugEnabled()) {
+    		LOG.debug(format("forward url : \"{0}\"", url));
+    	}
+    	
+    	//dupa getContextPath urmeaza calea spre jsp; request.getContextPath() =/anagram
+    	//apoi el compune /anagram/jsp/AnagramStart.jsp
+    	request.getContextPath();
+    	
+    	request.getRequestDispatcher(url).forward(request, response);
     }
 
     @Override
