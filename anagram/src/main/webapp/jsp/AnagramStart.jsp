@@ -14,62 +14,43 @@
 	<head>
 	<title>Anagram Start</title>
 	
-	<!-- <script language="javascript" type="text/javascript" src="./../js/jquery-1.3.2.min.js"></script> -->
+	<script language="javascript" type="text/javascript" src="./../anagram/js/jquery-1.3.2.min.js"></script>
 	
 	<!-- <link href="./../css/login.css" rel="stylesheet" type="text/css" /> -->
   	
 	<script type="text/javascript" charset="utf-8">
 		
-/* 		function changePassword(){
+ 		function verifyAnagram(){
 			$.post(
-				'./../ChangePwdServlet',
-				$(document.forms.changePwdServlet).serialize(),
+				'./../anagram/AnagramStartServlet',
+				$(document.forms.AnagramStartServletForm).serialize(),
 				function (data) {
 					$("#errorLabel").empty();
-					if (data.e == "confirm"){
-						redirect();
-					}
-					else if(data.e == "ko"){
+					if(data.e == "ko") {
+						alert("ko");
 						$("#errorLabel").html(i18n.getString("ccmd.manager.changepwd.problems"));	
-                    }
-                    else if(data.e == "weak"){
-                        $("#errorLabel").html(i18n.getString("ccmd.manager.changepwd.weak"));   
-                    }
-                    else if(data.e == "pwdDifferent"){
-                        $("#errorLabel").html(i18n.getString("ccmd.manager.changepwd.password.different"));   
-					}
-                    else if(data.e == "invalidDate"){
-                    	redirect();  
-					}
-                    else{
-						$("#changePasswordContent").hide();
-						$("#leftBlockTitle").hide();
+                    } else {
+                    	alert("else");
 						$("#errorLabel").hide();
-						$("#finalDiv").show();
-						
 					}
 				},"json"
 			);
 		}
-	
-		function verify() {
+		
+		function verifyField() {
 			$("#errorLabel").empty();
-			var a = $("#newPassword").val();
-			var b = $("#confirmPassword").val();
+			var a = $("#text").val();
 			if (a == "") {
 				$("#errorLabel").html(i18n.getString("ccmd.manager.changepwd.empty.password"));
-			} else if (b != a) {
-				$("#errorLabel").html(i18n.getString("ccmd.manager.changepwd.empty.confirm"));
 			}
 			else {
-				changePassword();
+				verifyAnagram();
 			}
 		}
- */	
+
 		
 		$(document).ready(function(){
-			$("#finalDiv").hide();
-		})
+		});
 	
 	</script>
 	</head>
@@ -77,7 +58,7 @@
 	<body id="main">
 	Body	
 		<div id="container">
-			<form name="AnagramStartServlet">
+			<form name="AnagramStartServletForm">
 			
 				<div class="containerTop"></div>
 				<div class="containerBackground">
@@ -93,9 +74,10 @@
 							<p>
 								Scrie aici:<br/>
 								<input type="text" id="text" name="text" class="inputText" autocomplete="off" />
+								<input type="hidden" id="word" name="word" value="<%=word%>">  
 							</p>
 							<p>
-								<a class="button" href="javascript:verify();" onclick="this.blur();">
+								<a class="button" href="javascript:verifyField();" onclick="this.blur();">
 									<span>Submit</span>
 								</a>
 								

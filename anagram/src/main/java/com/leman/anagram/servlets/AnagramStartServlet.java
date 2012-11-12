@@ -1,6 +1,7 @@
 package com.leman.anagram.servlets;
 
 import static java.text.MessageFormat.format;
+import static com.emailvision.commons.http.utils.ParamChecker.getFirstHttpAttributeStringValue;
 
 import java.io.IOException;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.emailvision.commons.api.restful.exceptions.entity.ExceptionEntity;
@@ -26,8 +28,6 @@ public class AnagramStartServlet extends HttpServlet {
 	private static final long serialVersionUID = 93312596895596119L;
     private static final Logger LOG = Logger.getLogger(AnagramStartServlet.class);
       
-    public static final String PAGE_OGIN_CHANGE_PASSWORD = "/login/jsp/AnagramStart.jsp";
-    
     private IEmvProperties properties;
     
     private static Integer timeout;
@@ -105,9 +105,18 @@ public class AnagramStartServlet extends HttpServlet {
             LOG.debug("Entering doPost AnagramStartServlet");
         }
         
-//        final String login = getFirstHttpAttributeStringValue(request, AuthenticationServlet.HTTP_ATTR_USERNAME);
-//        final String oneTimePassword = getFirstHttpAttributeStringValue(request, HTTP_ATTR_URLENCRYPTKEY);
-//        final String newPassword = getFirstHttpAttributeStringValue(request, HTTP_ATTR_NEWPASSWORD);
+        final String typedWord = getFirstHttpAttributeStringValue(request, "text");
+        final String word = getFirstHttpAttributeStringValue(request, "word");
+        
+        boolean containsOnly2 = StringUtils.containsOnly(typedWord, word);
+
+        if (LOG.isDebugEnabled()) {
+    		LOG.debug("word: " + word);
+    		LOG.debug("typedWord: " + typedWord);
+    		LOG.debug("containsOnly2: " + containsOnly2);
+    	}
+    	
+    	
 //        final String confirmPassword = getFirstHttpAttributeStringValue(request, HTTP_ATTR_CONFIRMPASSWORD);
 //
 //        isBlankThrowIllegalArgumentException(login, AuthenticationServlet.HTTP_ATTR_USERNAME);

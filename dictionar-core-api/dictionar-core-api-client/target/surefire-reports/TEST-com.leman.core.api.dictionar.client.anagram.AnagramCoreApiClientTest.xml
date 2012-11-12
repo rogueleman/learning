@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="1.717" errors="0" skipped="0" tests="3" name="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest">
+<testsuite failures="0" time="0.874" errors="0" skipped="0" tests="3" name="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/java/jdk1.7.0_04/jre/lib/amd64"/>
@@ -59,7 +59,7 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="1.142" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_getWord_when_hostname_is_null"/>
-  <testcase time="0.439" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_second_constructor"/>
-  <testcase time="0.136" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_null_api_server_format"/>
+  <testcase time="0.538" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_getWord_when_hostname_is_null"/>
+  <testcase time="0.234" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_second_constructor"/>
+  <testcase time="0.102" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_null_api_server_format"/>
 </testsuite>
