@@ -1,17 +1,16 @@
 package com.leman.core.api.dictionar.server.anagram.services;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
+import java.util.Set;
 
-import com.emailvision.core.constants.jpa.Sort;
 import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
-import com.sun.jersey.core.header.FormDataContentDisposition;
-
 
 public interface IWordsService {
 
-	AnagramEntity getAnagramEntity();
+	AnagramEntity getAnagramEntityForRandomWord();
+
+	Set<AnagramEntity> getAllAnagramListForWord(String sortedChars, Boolean areDiacriticsPresent);
+
+	Set<AnagramEntity> getAllAnagramListForWordAndSubWords(String sortedChars, Boolean areDiacriticsPresent);
 
 //	/**
 //	 * Allows to get archives with parameters

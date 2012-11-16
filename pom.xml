@@ -17,7 +17,7 @@
 
 	<modules>
 		<module>dictionar-data</module>
-<!-- 		<module>dictionar-core-api</module> -->
+ 		<module>dictionar-core-api</module> 
 	</modules>
 
 	<properties>

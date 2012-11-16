@@ -60,7 +60,7 @@ public class Permutations {
 //    	String elements = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //    	String elements = "electroglotospectrografie";
 //    	String elements = "aaeelmnur";
-    	String elements = "aelmnu";
+    	String elements = "aaeelmnuxx";
     	System.out.println("Enter Number of character: ");
 /*    	InputStreamReader input = new InputStreamReader(System.in);
 		BufferedReader reader = new BufferedReader(input);

@@ -40,7 +40,7 @@ public class AnagramCoreApiClientTestITG {
 		AnagramEntity entity = new AnagramEntity();
 		
 		//When
-		final AnagramEntity response = anagramCoreApiClient.getWord(HOST_NAME);
+		final AnagramEntity response = anagramCoreApiClient.getRandomWord(HOST_NAME);
 		
 		//Then
 //		assertThat(entity).isEqualTo(response);

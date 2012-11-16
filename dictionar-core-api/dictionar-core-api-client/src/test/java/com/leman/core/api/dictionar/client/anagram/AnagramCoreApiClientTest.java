@@ -52,12 +52,12 @@ public class AnagramCoreApiClientTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void should_test_getWord_when_hostname_is_null() throws Exception {
 		//when
-		apiClient.getWord(null);
+		apiClient.getRandomWord(null);
 	}
 	
 	public void should_test_getWord_when_imageId_is_null() throws Exception {
 		//when
-		apiClient.getWord("apiHost");
+		apiClient.getRandomWord("apiHost");
 	}
 
 //	@Test(expected=IllegalArgumentException.class)

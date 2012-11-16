@@ -4,10 +4,13 @@ import com.emailvision.commons.api.restful.utils.GenericResourcePath;
 
 public final class ResourcePath extends GenericResourcePath {
 
-	public static final String WORD_ARCHIVE_RESOURCE_PATH = "words";
+	public static final String WORDS_RESOURCE_PATH = "words";
 	public static final String WORD_RESOURCE_PATH = "word";
+	public static final String RANDOM_RESOURCE_PATH = "random";
 	
 	
+	public static final String QUERY_PARAM_SORTED_CHARS = "sortedChars";
+	public static final String QUERY_PARAM_ARE_DIACRITICS_PRESENTS = "areDiacriticsPresent";
 	
 	
 	

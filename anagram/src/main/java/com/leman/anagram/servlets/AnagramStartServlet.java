@@ -4,6 +4,8 @@ import static java.text.MessageFormat.format;
 import static com.emailvision.commons.http.utils.ParamChecker.getFirstHttpAttributeStringValue;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -37,6 +39,8 @@ public class AnagramStartServlet extends HttpServlet {
     private static String dictionarApiUrlFormat;
     
     private static AnagramCoreApiClient anagramCoreApiClient;
+    
+    private Set<AnagramEntity> anagramsEntities = null;
     
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -73,7 +77,7 @@ public class AnagramStartServlet extends HttpServlet {
     	final AnagramEntity anagramEntity;
     	
     	try {
-			anagramEntity = anagramCoreApiClient.getWord(dictionarApiHost);
+			anagramEntity = anagramCoreApiClient.getRandomWord(dictionarApiHost);
 		} catch (AnagramCoreApiException e) {
 			final ExceptionEntity entity = e.getEntity();
 			LOG.error(entity.getErrorMessage());
@@ -81,6 +85,7 @@ public class AnagramStartServlet extends HttpServlet {
 		}
 
     	request.setAttribute("word", anagramEntity.getWord());
+    	request.setAttribute("anagramEntity", anagramEntity);
     	
     	if (LOG.isDebugEnabled()) {
     		LOG.debug("anagramEntity.getWord(): " + anagramEntity.getWord());
@@ -94,8 +99,6 @@ public class AnagramStartServlet extends HttpServlet {
     	
     	//dupa getContextPath urmeaza calea spre jsp; request.getContextPath() =/anagram
     	//apoi el compune /anagram/jsp/AnagramStart.jsp
-    	request.getContextPath();
-    	
     	request.getRequestDispatcher(url).forward(request, response);
     }
 
@@ -107,8 +110,20 @@ public class AnagramStartServlet extends HttpServlet {
         
         final String typedWord = getFirstHttpAttributeStringValue(request, "text");
         final String word = getFirstHttpAttributeStringValue(request, "word");
+        final String areDiacriticsPresent = getFirstHttpAttributeStringValue(request, "diacritics");
+        final AnagramEntity anagramEntity = (AnagramEntity) request.getAttribute("anagramEntity");
         
-        boolean containsOnly2 = StringUtils.containsOnly(typedWord, word);
+        if (anagramsEntities == null) {
+        	try {
+				anagramsEntities = anagramCoreApiClient.getWordAnagrams(dictionarApiHost, anagramEntity.getSortedWordChars(), Boolean.valueOf(areDiacriticsPresent));
+			} catch (AnagramCoreApiException e) {
+				final ExceptionEntity entity = e.getEntity();
+				LOG.error(entity.getErrorMessage());
+				throw new ServletException(e);
+			}
+        }
+        
+        boolean containsOnly2 = StringUtils.containsOnly(typedWord, anagramEntity.getWord());
 
         if (LOG.isDebugEnabled()) {
     		LOG.debug("word: " + word);

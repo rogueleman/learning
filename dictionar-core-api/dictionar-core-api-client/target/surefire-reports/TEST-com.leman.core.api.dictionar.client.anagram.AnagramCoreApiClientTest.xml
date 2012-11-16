@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.874" errors="0" skipped="0" tests="3" name="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest">
+<testsuite failures="0" time="0.943" errors="0" skipped="0" tests="3" name="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/java/jdk1.7.0_04/jre/lib/amd64"/>
@@ -14,7 +14,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/local00/sources/learning/dictionar-core-api"/>
+    <property name="user.dir" value="/local00/sources/learning"/>
     <property name="java.runtime.version" value="1.7.0_04-b20"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/usr/java/jdk1.7.0_04/jre/lib/endorsed"/>
@@ -59,7 +59,7 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.538" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_getWord_when_hostname_is_null"/>
-  <testcase time="0.234" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_second_constructor"/>
-  <testcase time="0.102" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_null_api_server_format"/>
+  <testcase time="0.545" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_getWord_when_hostname_is_null"/>
+  <testcase time="0.304" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_second_constructor"/>
+  <testcase time="0.094" classname="com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClientTest" name="should_test_null_api_server_format"/>
 </testsuite>

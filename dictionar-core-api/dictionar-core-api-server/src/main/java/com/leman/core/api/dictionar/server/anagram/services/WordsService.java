@@ -1,6 +1,10 @@
 package com.leman.core.api.dictionar.server.anagram.services;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -13,7 +17,7 @@ import com.leman.core.data.dictionar.jpa.domain.words.Words;
 import com.leman.core.data.dictionar.jpa.repository.words.IWordsRepository;
 import com.leman.core.data.dictionar.jpa.spring.transaction.AnagramReadOnlyTx;
 
-@Service("imageService")
+@Service("wordsService")
 @AnagramReadOnlyTx
 public class WordsService implements IWordsService {
 
@@ -39,9 +43,9 @@ public class WordsService implements IWordsService {
 	}
 
 	@Override
-	public AnagramEntity getAnagramEntity() {
+	public AnagramEntity getAnagramEntityForRandomWord() {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Entering getAnagramEntity ..... ");
+			LOG.debug("Entering getAnagramEntityForRandomWord ..... ");
 		}
 		boolean test=false;
 		
@@ -59,6 +63,38 @@ public class WordsService implements IWordsService {
 		return convertWordsToAnagramEntity(word);
 	}
 
+	@Override
+	public Set<AnagramEntity> getAllAnagramListForWord(final String sortedChars, final Boolean areDiacriticsPresent) {
+
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Entering getAllAnagramListForWord ");
+		}
+
+		final List<Words> words = wordsRepository.getWords(sortedChars, areDiacriticsPresent);
+		final HashSet<AnagramEntity> anagramEntities = new HashSet<AnagramEntity>(words.size());
+		for (final Words word : words) {
+			anagramEntities.add(convertWordsToAnagramEntity(word));
+		}
+
+		return anagramEntities;
+	}
+	
+	@Override
+	public Set<AnagramEntity> getAllAnagramListForWordAndSubWords(final String sortedChars, final Boolean areDiacriticsPresent) {
+
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Entering getAllAnagramListForWordAndSubWords ");
+		}
+		
+		
+		
+		Set<AnagramEntity> anagramEntities = new HashSet<AnagramEntity>();
+		anagramEntities = getAllAnagramListForWord(sortedChars, areDiacriticsPresent);
+
+		return anagramEntities;
+	}
+	
+	
 	private Long getRandomWordId(){
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Entering getRandomWordId ..... ");
@@ -86,56 +122,13 @@ public class WordsService implements IWordsService {
 	 */
 	private AnagramEntity convertWordsToAnagramEntity(final Words word) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("Entering convertWordsToAnagramEntity ..... ");
+			LOG.debug("Entering convertWordsToAnagramEntity ..... " + word.getId());
 		}
 		return new AnagramEntity(word.getId(), word.getLang().getLang(), word.getWord(), word.getWordWithoutDiacritics(),
 				word.getSortedWordChars(), word.getSortedWordCharsWithoutDiacritics(), word.getWordLength());
 	}
 	
 	
-	
-	
-//	
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public List<AnagramEntity> getArchives(final String search, final String order, final Sort sort, final List<Long> managerId) {
-//		return getArchives(1, search, order, sort, managerId);
-//	}
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public List<AnagramEntity> getArchives(final Integer currentPage, final String search, final String order, final Sort sort, final List<Long> managerId) {
-//		return getArchives(currentPage, 10, search, order, sort, managerId);
-//	}
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public List<AnagramEntity> getArchives(final Integer currentPage, final Integer nbItemPerPage, final String search, final String order, final Sort sort, final List<Long> managerId) {
-//
-//		if (LOG.isDebugEnabled()) {
-//			LOG.debug("Entering getArchives ");
-//		}
-//
-//		SingularAttribute<Image, ?> attributeOrder = null;
-//		if (order != null) {
-//			attributeOrder = imageRepository.getDeclaredSingularAttribute(order);
-//		}
-//
-//		final List<Image> images = imageRepository.findArchives(managerId, currentPage, nbItemPerPage, search, attributeOrder, sort);
-//		final ArrayList<AnagramEntity> imageEntities = new ArrayList<AnagramEntity>(images.size());
-//		for (final Image image : images) {
-//			imageEntities.add(convertImageToImageEntity(image));
-//		}
-//
-//		return imageEntities;
-//	}
-//
 //	/**
 //	 * {@inheritDoc}
 //	 */
@@ -214,7 +207,6 @@ public class WordsService implements IWordsService {
 //				imageThumbnail.delete();
 //			}
 //		}
-//
 //	}
 //
 //	/**

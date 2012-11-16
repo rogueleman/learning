@@ -35,7 +35,7 @@ public class DefinitionRepository extends AbstractGenericRepository<Definition, 
     	final Root<Definition> fromDefinition = criteriaQuery.from(Definition.class);
     	
     	if (search != null) {
-    		Predicate predicateSearch = criteriaBuilder.like(criteriaBuilder.lower(fromDefinition.get(Definition_.lexicon)), "%" + search.toLowerCase() + "%");
+    		Predicate predicateSearch = criteriaBuilder.like(criteriaBuilder.lower(fromDefinition.get(Definition_.lexicon)), search.toLowerCase() + "%");
     		criteriaQuery.where(predicateSearch);
     	}
     	

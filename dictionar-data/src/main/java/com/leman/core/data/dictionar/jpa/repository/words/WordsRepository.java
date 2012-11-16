@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.SingularAttribute;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
@@ -34,5 +35,24 @@ public class WordsRepository extends AbstractGenericRepository<Words, Long> impl
     	final Root<Words> fromUser = criteriaQuery.from(Words.class);
     	return findByCriteriaQuery(criteriaQuery.orderBy(criteriaBuilder.asc(fromUser.get(Words_.id))));
 	}
+
+	
+	@Override
+	public List<Words> getWords(final String sortedChars, final Boolean areDiacriticsPresent) {
+    	final CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+    	final CriteriaQuery<Words> criteriaQuery = criteriaBuilder.createQuery(Words.class);
+    	final Root<Words> fromWord = criteriaQuery.from(Words.class);
+    	
+    	SingularAttribute<Words, String> sortedCharsColumn = Words_.sortedWordCharsWithoutDiacritics;
+    	
+    	if (areDiacriticsPresent) {
+			sortedCharsColumn = Words_.sortedWordChars;
+    	}
+    	
+    	criteriaQuery.where(criteriaBuilder.equal(criteriaBuilder.lower(fromWord.get(sortedCharsColumn)), sortedChars));
+			
+    	return findByCriteriaQuery(criteriaQuery.orderBy(criteriaBuilder.asc(fromWord.get(sortedCharsColumn))));
+	}
+
 	
 }

@@ -1,35 +1,13 @@
 package com.leman.core.api.dictionar.server.anagram.resources;
 
-import static com.emailvision.commons.api.restful.utils.GenericResourcePath.ERROR_MISSING_PARAMETER;
-import static com.emailvision.commons.api.restful.utils.GenericResourcePath.QUERY_PARAM_CLIENT_ID;
-import static com.emailvision.commons.api.restful.utils.GenericResourcePath.QUERY_PARAM_MANAGER_ID;
-import static com.emailvision.commons.api.restful.utils.GenericResourcePath.QUERY_PARAM_MANAGER_IDS;
-import static com.emailvision.commons.http.utils.ParamChecker.isBlankListThrowIllegalArgumentException;
-import static com.emailvision.commons.http.utils.ParamChecker.isNegativeAndZeroThrowIllegalArgumentException;
-import static com.emailvision.commons.http.utils.ParamChecker.isNullThrowIllegalArgumentException;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.FORM_PARAM_IMAGE_DESC;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.FORM_PARAM_IMAGE_NAME;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.FORM_PARAM_UPLOAD_FILE;
+import static com.leman.core.api.dictionar.common.anagram.ResourcePath.RANDOM_RESOURCE_PATH;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORD_RESOURCE_PATH;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_CLIENT_IMAGE_MAX_USED;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_CLIENT_IMAGE_QUOTA_USED;
-import static java.text.MessageFormat.format;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -37,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.emailvision.commons.api.restful.resources.AbstractRestFulResource;
-import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
 import com.leman.core.api.dictionar.server.anagram.services.IWordsService;
-import com.sun.jersey.core.header.FormDataContentDisposition;
-import com.sun.jersey.multipart.FormDataParam;
 import com.sun.jersey.spi.resource.Singleton;
 
 @Path(WORD_RESOURCE_PATH)
@@ -61,8 +36,9 @@ public class WordResource extends AbstractRestFulResource {
 	}
 	
 	@GET
-	public Response getWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader) {
-		return buildGetResponse(requestHeader, wordService.getAnagramEntity());
+	@Path(RANDOM_RESOURCE_PATH)
+	public Response getRandomWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader) {
+		return buildGetResponse(requestHeader, wordService.getAnagramEntityForRandomWord());
 	}
 
 //	@POST
