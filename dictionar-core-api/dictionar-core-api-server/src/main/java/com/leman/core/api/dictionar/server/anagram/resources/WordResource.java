@@ -1,11 +1,17 @@
 package com.leman.core.api.dictionar.server.anagram.resources;
 
+import static com.emailvision.commons.api.restful.utils.GenericResourcePath.ERROR_MISSING_PARAMETER;
+import static com.emailvision.commons.http.utils.ParamChecker.isNullThrowIllegalArgumentException;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.RANDOM_RESOURCE_PATH;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORD_RESOURCE_PATH;
+import static java.text.MessageFormat.format;
+
+import java.io.IOException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -15,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.emailvision.commons.api.restful.resources.AbstractRestFulResource;
+import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
 import com.leman.core.api.dictionar.server.anagram.services.IWordsService;
 import com.sun.jersey.spi.resource.Singleton;
 
@@ -41,6 +48,15 @@ public class WordResource extends AbstractRestFulResource {
 		return buildGetResponse(requestHeader, wordService.getAnagramEntityForRandomWord());
 	}
 
+	@POST
+	public Response postWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, final String word, final Integer langId) throws IOException{
+		isNullThrowIllegalArgumentException(word, format(ERROR_MISSING_PARAMETER, "word"));
+		isNullThrowIllegalArgumentException(langId, format(ERROR_MISSING_PARAMETER, "lang"));
+		
+		AnagramEntity anagramEntity = wordService.postWord(word, langId);
+		return buildPutResponse(requestHeader, anagramEntity);
+	}
+	
 //	@POST
 //	@Consumes(MediaType.MULTIPART_FORM_DATA)
 //	public Response postImage(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_MANAGER_ID) final Long managerId, 

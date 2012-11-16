@@ -1,6 +1,7 @@
 package com.leman.core.api.dictionar.server.anagram.services;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.text.Normalizer;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -12,9 +13,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
+import com.leman.anagram.Language;
+import com.leman.anagram.WordUtils;
 import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
 import com.leman.core.data.dictionar.jpa.domain.words.Words;
 import com.leman.core.data.dictionar.jpa.repository.words.IWordsRepository;
+import com.leman.core.data.dictionar.jpa.spring.transaction.AnagramPersistTx;
 import com.leman.core.data.dictionar.jpa.spring.transaction.AnagramReadOnlyTx;
 
 @Service("wordsService")
@@ -60,7 +64,7 @@ public class WordsService implements IWordsService {
 		} while (test);
 
 		final Words word = wordsRepository.load(id);
-		return convertWordsToAnagramEntity(word);
+		return convertWordToAnagramEntity(word);
 	}
 
 	@Override
@@ -73,7 +77,7 @@ public class WordsService implements IWordsService {
 		final List<Words> words = wordsRepository.getWords(sortedChars, areDiacriticsPresent);
 		final HashSet<AnagramEntity> anagramEntities = new HashSet<AnagramEntity>(words.size());
 		for (final Words word : words) {
-			anagramEntities.add(convertWordsToAnagramEntity(word));
+			anagramEntities.add(convertWordToAnagramEntity(word));
 		}
 
 		return anagramEntities;
@@ -120,13 +124,30 @@ public class WordsService implements IWordsService {
 	 * @param anagramEntity
 	 * @return
 	 */
-	private AnagramEntity convertWordsToAnagramEntity(final Words word) {
+	private AnagramEntity convertWordToAnagramEntity(final Words word) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Entering convertWordsToAnagramEntity ..... " + word.getId());
 		}
 		return new AnagramEntity(word.getId(), word.getLang().getLang(), word.getWord(), word.getWordWithoutDiacritics(),
 				word.getSortedWordChars(), word.getSortedWordCharsWithoutDiacritics(), word.getWordLength());
 	}
+
+	
+	@Override
+	@AnagramPersistTx
+	public AnagramEntity postWord(final String word, final Integer langId) throws IOException {	
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Entering postWord..... ");
+		}
+		
+		String wordWithoutDiacritics = Normalizer.normalize(word, Normalizer.Form.NFD);
+		wordWithoutDiacritics = word.replaceAll("[^\\p{ASCII}]", "");
+		
+		Words wordObject = new Words(Language.getByValue(langId), word, WordUtils.sortStringChars(word), wordWithoutDiacritics, WordUtils.sortStringChars(wordWithoutDiacritics));
+		
+		wordsRepository.persist(wordObject);
+		return convertWordToAnagramEntity(wordObject);
+	}	
 	
 	
 //	/**

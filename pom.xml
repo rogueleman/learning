@@ -16,8 +16,10 @@
 	<name>Learning</name>
 
 	<modules>
+		<module>dictionar-lib</module>
 		<module>dictionar-data</module>
- 		<module>dictionar-core-api</module> 
+ 		<module>dictionar-core-api</module>
+		<module>anagram</module> 
 	</modules>
 
 	<properties>

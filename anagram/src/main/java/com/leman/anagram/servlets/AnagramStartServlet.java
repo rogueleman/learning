@@ -4,7 +4,6 @@ import static java.text.MessageFormat.format;
 import static com.emailvision.commons.http.utils.ParamChecker.getFirstHttpAttributeStringValue;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -72,7 +71,7 @@ public class AnagramStartServlet extends HttpServlet {
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
     	if (LOG.isDebugEnabled()) {
-    		LOG.debug("Enternig doGet AnagramStartServlet");
+    		LOG.debug("Entering doGet AnagramStartServlet.....");
     	}
     	final AnagramEntity anagramEntity;
     	
@@ -105,7 +104,7 @@ public class AnagramStartServlet extends HttpServlet {
     @Override
     protected void doPost(final HttpServletRequest request, final HttpServletResponse resp) throws ServletException, IOException {
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Entering doPost AnagramStartServlet");
+            LOG.debug("Entering doPost AnagramStartServlet.....");
         }
         
         final String typedWord = getFirstHttpAttributeStringValue(request, "text");

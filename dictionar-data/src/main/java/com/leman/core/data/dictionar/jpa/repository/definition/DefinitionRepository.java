@@ -29,6 +29,9 @@ public class DefinitionRepository extends AbstractGenericRepository<Definition, 
 	}
 
 	@Override
+	//TODO Here to define which words we take from Definition table 
+	//Now we take all words starting with the value of the search
+	//There are words in the table that does not appear when searching in the online page www.dexonline.ro
 	public List<Definition> getDefinitions(String search) {
     	final CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
     	final CriteriaQuery<Definition> criteriaQuery = criteriaBuilder.createQuery(Definition.class);

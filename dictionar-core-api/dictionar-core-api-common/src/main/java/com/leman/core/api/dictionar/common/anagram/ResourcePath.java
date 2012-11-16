@@ -13,6 +13,8 @@ public final class ResourcePath extends GenericResourcePath {
 	public static final String QUERY_PARAM_ARE_DIACRITICS_PRESENTS = "areDiacriticsPresent";
 	
 	
+	public static final String QUERY_PARAM_DEFINITION_SEARCH = "definitionSearch";
+	
 	
 	
 	public static final String QUERY_PARAM_CLIENT_IMAGE_QUOTA_USED = "clientImageQuotaUsed";

@@ -6,6 +6,9 @@
         <dependent-module archiveName="dictionar-core-api-common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dictionar-core-api-common/dictionar-core-api-common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="emv-commons-http-0.4-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/emv-commons-http/emv-commons-http">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="dictionar-data-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dictionar-data/dictionar-data">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -28,9 +31,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="emv-commons-api-0.4-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/emv-commons-api/emv-commons-api">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="emv-commons-http-0.4-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/emv-commons-http/emv-commons-http">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="dictionar-core"/>

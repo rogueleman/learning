@@ -1,6 +1,7 @@
 package com.leman.core.api.dictionar.server.anagram.resources;
 
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_ARE_DIACRITICS_PRESENTS;
+import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_DEFINITION_SEARCH;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_SORTED_CHARS;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORDS_RESOURCE_PATH;
 
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Component;
 
 import com.emailvision.commons.api.restful.resources.AbstractRestFulResource;
 import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
+import com.leman.core.api.dictionar.common.anagram.entities.DefinitionEntity;
+import com.leman.core.api.dictionar.server.anagram.services.IDefinitionService;
 import com.leman.core.api.dictionar.server.anagram.services.IWordsService;
 import com.sun.jersey.spi.resource.Singleton;
 
@@ -32,6 +35,8 @@ import com.sun.jersey.spi.resource.Singleton;
 public class WordsResource extends AbstractRestFulResource {
 
 	private final IWordsService wordsService;
+	
+	private final IDefinitionService definitionService;
 
 //	private static final String PAGE_NUMBER_REGEX_PATH = "{pageNumber: [0-9]+}";
 //
@@ -42,8 +47,9 @@ public class WordsResource extends AbstractRestFulResource {
 //	private static final String PAGE_NUMBER = "pageNumber";
 	
 	@Autowired
-	public WordsResource(final IWordsService wordsService) {
+	public WordsResource(final IWordsService wordsService, final IDefinitionService definitionService) {
 		this.wordsService = wordsService;
+		this.definitionService = definitionService;
 	}
 
 	@GET
@@ -52,6 +58,15 @@ public class WordsResource extends AbstractRestFulResource {
 		return buildGetResponse(requestHeader, new GenericEntity<Set<AnagramEntity>>(anagramEntities){});
 	}
 
+	
+	@GET
+	@Path(QUERY_PARAM_DEFINITION_SEARCH)
+	public Response getWordsFromDefinition(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_DEFINITION_SEARCH) final String search) {
+		final Set<DefinitionEntity> definitionEntities = definitionService.getDefinitionListWithBeginingChars(search);
+		return buildGetResponse(requestHeader, new GenericEntity<Set<DefinitionEntity>>(definitionEntities){});
+	}
+	
+	
 //	@GET
 //	@Path(PAGE_NUMBER_REGEX_PATH)
 //	public Response getImageByPageNumber(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @PathParam(PAGE_NUMBER) final Integer pageNumber, @QueryParam(QUERY_PARAM_SEARCH) final String search, @QueryParam(QUERY_PARAM_ORDER) final String order, @QueryParam(QUERY_PARAM_SORT) final Sort sort, @QueryParam(QUERY_PARAM_MANAGER_IDS) final List<Long> managerIds) {

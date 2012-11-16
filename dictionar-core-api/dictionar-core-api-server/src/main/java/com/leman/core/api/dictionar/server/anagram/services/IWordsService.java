@@ -1,5 +1,6 @@
 package com.leman.core.api.dictionar.server.anagram.services;
 
+import java.io.IOException;
 import java.util.Set;
 
 import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
@@ -11,6 +12,8 @@ public interface IWordsService {
 	Set<AnagramEntity> getAllAnagramListForWord(String sortedChars, Boolean areDiacriticsPresent);
 
 	Set<AnagramEntity> getAllAnagramListForWordAndSubWords(String sortedChars, Boolean areDiacriticsPresent);
+
+	AnagramEntity postWord(String word, Integer lang) throws IOException;
 
 //	/**
 //	 * Allows to get archives with parameters

@@ -7,15 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.emailvision.data.jpa.domain.IEntity;
 import com.leman.anagram.Language;
 
-@Entity(name = "Words")
-@Table(name = "Words")
+@Entity(name = "Word")
+@Table(name = "Word")
 @Access(AccessType.FIELD)
+@SequenceGenerator(sequenceName="SEQ_WORD_ID", name="SEQ_WORD_ID", initialValue=1, allocationSize=1)
 public class Words implements IEntity<Long>{
 
 	/**

@@ -1,23 +1,19 @@
 package com.leman.core.api.dictionar.client.anagram;
 
 import static com.emailvision.commons.api.restful.utils.GenericResourcePath.ERROR_MISSING_PARAMETER;
-import static com.emailvision.commons.api.restful.utils.GenericResourcePath.QUERY_PARAM_CLIENT_ID;
-import static com.emailvision.commons.api.restful.utils.GenericResourcePath.QUERY_PARAM_MANAGER_IDS;
-import static com.emailvision.commons.http.utils.ParamChecker.isBlankListThrowIllegalArgumentException;
 import static com.emailvision.commons.http.utils.ParamChecker.isBlankThrowIllegalArgumentException;
-import static com.emailvision.commons.http.utils.ParamChecker.isNegativeAndZeroThrowIllegalArgumentException;
-import static com.sun.jersey.api.client.ClientResponse.Status.INTERNAL_SERVER_ERROR;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORD_RESOURCE_PATH;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORDS_RESOURCE_PATH;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.RANDOM_RESOURCE_PATH;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_SORTED_CHARS;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_ARE_DIACRITICS_PRESENTS;
+import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_SORTED_CHARS;
+import static com.leman.core.api.dictionar.common.anagram.ResourcePath.RANDOM_RESOURCE_PATH;
+import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORDS_RESOURCE_PATH;
+import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORD_RESOURCE_PATH;
+import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_DEFINITION_SEARCH;
+import static com.sun.jersey.api.client.ClientResponse.Status.INTERNAL_SERVER_ERROR;
 import static java.text.MessageFormat.format;
 
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.core.MediaType;
@@ -68,6 +64,35 @@ public final class AnagramCoreApiClient extends AbstractDictionarCoreApiClient {
 		return clientResponse.getEntity(new GenericType<HashSet<AnagramEntity>>() {});
 	}
 
+	
+	public AnagramEntity postWord(final String hostname, final String word, final String langId) throws AnagramCoreApiException, IOException {
+
+		isBlankThrowIllegalArgumentException(hostname, format(ERROR_MISSING_PARAMETER, "hostname"));
+		isBlankThrowIllegalArgumentException(word, format(ERROR_MISSING_PARAMETER, "word"));
+		isBlankThrowIllegalArgumentException(langId, format(ERROR_MISSING_PARAMETER, "langId"));
+
+		final MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+		queryParams.add("word", String.valueOf(word));
+		queryParams.add("langId", String.valueOf(langId));
+
+		final ClientResponse clientResponse = getPartialRequestBuilder(queryParams, UriBuilder.fromUri(format(dictionarCoreApiServerFormat, hostname)).build(), new String[] {WORD_RESOURCE_PATH}).post(ClientResponse.class);
+		checkResponseStatus(clientResponse);
+
+		return clientResponse.getEntity(AnagramEntity.class);
+	}	
+	
+
+	public Set<AnagramEntity> getWordsFromDefinition(final String hostname, final String search) throws AnagramCoreApiException, IOException {
+		
+		isBlankThrowIllegalArgumentException(hostname, format(ERROR_MISSING_PARAMETER, "hostname"));
+		
+		final ClientResponse clientResponse = getPartialRequestBuilder(hostname, search).get(ClientResponse.class);
+		
+		checkResponseStatus(clientResponse);
+		
+		return clientResponse.getEntity(new GenericType<HashSet<AnagramEntity>>() {});
+	}
+	
 	
 	
 
@@ -191,6 +216,16 @@ public final class AnagramCoreApiClient extends AbstractDictionarCoreApiClient {
 
 		return getPartialRequestBuilder(queryParams, UriBuilder.fromUri(format(dictionarCoreApiServerFormat, hostname)).build(), new String[] {WORDS_RESOURCE_PATH}).type(MediaType.APPLICATION_JSON);
 	}
+
+	private Builder getPartialRequestBuilder(final String hostname, final String search) {
+		isBlankThrowIllegalArgumentException(hostname, format(ERROR_MISSING_PARAMETER, "hostname"));
+		
+		final MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
+
+		queryParams.add(QUERY_PARAM_DEFINITION_SEARCH, String.valueOf(search));
+
+		return getPartialRequestBuilder(queryParams, UriBuilder.fromUri(format(dictionarCoreApiServerFormat, hostname)).build(), new String[] {WORDS_RESOURCE_PATH, QUERY_PARAM_DEFINITION_SEARCH}).type(MediaType.APPLICATION_JSON);
+	}	
 	
 	private Builder getPartialRequestBuilder(final MultivaluedMap<String, String> queryParams, final URI apiUrl, final String ... pathParams) {
 		final Builder builder = ClientHelper.getPartialRequestBuilder(client, apiUrl, queryParams, pathParams);		

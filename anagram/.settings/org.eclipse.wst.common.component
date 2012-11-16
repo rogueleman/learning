@@ -6,6 +6,9 @@
         <dependent-module archiveName="emv-commons-http-0.4-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/emv-commons-http/emv-commons-http">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="dictionar-lib-0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dictionar-lib/dictionar-lib">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="dictionar-core-api-client-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/dictionar-core-api-client/dictionar-core-api-client">
             <dependency-type>uses</dependency-type>
         </dependent-module>

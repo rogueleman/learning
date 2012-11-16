@@ -34,6 +34,22 @@
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>
 
+	<!-- Filters -->
+	<filter>
+		<filter-name>EncodeFilter</filter-name>
+		<filter-class>com.emailvision.commons.http.filters.CharsetFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>EncodeFilter</filter-name>
+		<servlet-name>AnagramStartServlet</servlet-name>	
+		<!-- <servlet-name>GetWordsFromDictionaryServlet</servlet-name> -->
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
 	<!-- Servlet -->
 	<servlet>
 		<servlet-name>AnagramStartServlet</servlet-name>
@@ -44,6 +60,17 @@
 		<servlet-name>AnagramStartServlet</servlet-name>
 		<url-pattern>/AnagramStartServlet</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>GetWordsFromDictionaryServlet</servlet-name>
+		<servlet-class>com.leman.anagram.servlets.GetWordsFromDictionaryServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>GetWordsFromDictionaryServlet</servlet-name>
+		<url-pattern>/GetWordsFromDictionaryServlet</url-pattern>
+	</servlet-mapping>
+
 
 	<!-- This tag is for the welcome files such as index.html -->
 	<welcome-file-list>
