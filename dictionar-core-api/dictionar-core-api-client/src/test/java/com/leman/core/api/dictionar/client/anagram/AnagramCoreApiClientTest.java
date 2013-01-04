@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.leman.core.api.dictionar.client.AbstractDictionarCoreApiClient;
-import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
 
 
 public class AnagramCoreApiClientTest {
@@ -17,16 +17,16 @@ public class AnagramCoreApiClientTest {
 	private AnagramCoreApiClient apiClient;
 
 	
-	public static AnagramEntity anagram1 = new AnagramEntity(0l, "1", "leu", "leu", "elu", "elu", 3);
-	public static AnagramEntity anagram2 = new AnagramEntity(1l, "1", "meu", "meu", "emu", "emu", 3);
-	public static AnagramEntity anagram3 = new AnagramEntity(1l, "1", "manuel", "manuel", "aelmnu", "aelmnu", 6);
-	public static AnagramEntity anagram4 = new AnagramEntity(1l, "1", "lemn", "lemn", "elmn", "elmn", 4);
+	public static WordEntity anagram1 = new WordEntity(0l, "1", "leu", "leu", "elu", "elu", 3);
+	public static WordEntity anagram2 = new WordEntity(1l, "1", "meu", "meu", "emu", "emu", 3);
+	public static WordEntity anagram3 = new WordEntity(1l, "1", "manuel", "manuel", "aelmnu", "aelmnu", 6);
+	public static WordEntity anagram4 = new WordEntity(1l, "1", "lemn", "lemn", "elmn", "elmn", 4);
 	
-	private static List<AnagramEntity> listOfWords;
+	private static List<WordEntity> listOfWords;
 
-	private static void setImages(final AnagramEntity... anagrams) {
-		listOfWords = new ArrayList<AnagramEntity>();
-		for (final AnagramEntity anagramMetaEntity : anagrams) {
+	private static void setImages(final WordEntity... anagrams) {
+		listOfWords = new ArrayList<WordEntity>();
+		for (final WordEntity anagramMetaEntity : anagrams) {
 			listOfWords.add(anagramMetaEntity);
 		}
 	}

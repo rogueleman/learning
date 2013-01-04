@@ -60,7 +60,7 @@
 		</init-param>
 		<init-param>
      	 	<param-name>entityManagerFactoryBeanName</param-name>      
-     		<param-value>anagramEntityManagerFactory</param-value>       
+     		<param-value>wordEntityManagerFactory</param-value>       
    		</init-param>
 	</filter>
 	<filter-mapping>
@@ -132,7 +132,7 @@
         <servlet-class>com.emailvision.commons.http.servlets.monitor.PingPongSpringServlet</servlet-class>
        	<init-param>
 			<param-name>entityManagerFactoryBeanName</param-name>
- 			<param-value>anagramEntityManagerFactory</param-value>
+ 			<param-value>wordEntityManagerFactory</param-value>
 		</init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>

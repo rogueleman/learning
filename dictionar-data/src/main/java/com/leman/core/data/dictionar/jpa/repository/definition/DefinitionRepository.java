@@ -14,14 +14,14 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
 
 import com.emailvision.data.jpa.repository.AbstractGenericRepository;
-import com.leman.core.data.dictionar.jpa.Anagram;
+import com.leman.core.data.dictionar.jpa.Dictionar;
 import com.leman.core.data.dictionar.jpa.domain.definition.Definition;
 import com.leman.core.data.dictionar.jpa.domain.definition.Definition_;
 
 @Repository("definitionRepository")
 public class DefinitionRepository extends AbstractGenericRepository<Definition, Integer> implements IDefinitionRepository {
 
-	@PersistenceContext(type=PersistenceContextType.TRANSACTION, unitName=Anagram.PERSISTENCE_UNIT_NAME)
+	@PersistenceContext(type=PersistenceContextType.TRANSACTION, unitName=Dictionar.PERSISTENCE_UNIT_NAME)
 	@Required
 	@Override
 	public void setEntityManager(EntityManager entityManager) {

@@ -19,7 +19,7 @@ import com.emailvision.commons.properties.EmvProperties;
 import com.emailvision.commons.properties.IEmvProperties;
 import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClient;
 import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiException;
-import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
 
 @WebServlet("/GetWordsFromDictionaryServlet")
 public class GetWordsFromDictionaryServlet extends HttpServlet {
@@ -38,7 +38,7 @@ public class GetWordsFromDictionaryServlet extends HttpServlet {
     
     private static AnagramCoreApiClient anagramCoreApiClient;
     
-    private Set<AnagramEntity> anagramsEntities = null;
+    private Set<WordEntity> wordsEntities = null;
     
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -91,7 +91,7 @@ public class GetWordsFromDictionaryServlet extends HttpServlet {
         }
         
         try {
-			anagramsEntities = anagramCoreApiClient.getWordsFromDefinition(dictionarApiHost, "acas");
+			wordsEntities = anagramCoreApiClient.getWordsFromDefinition(dictionarApiHost, "acas");
 		} catch (AnagramCoreApiException e) {
 			final ExceptionEntity entity = e.getEntity();
 			LOG.error(entity.getErrorMessage());
@@ -99,13 +99,13 @@ public class GetWordsFromDictionaryServlet extends HttpServlet {
 		}
         
         if (LOG.isDebugEnabled()) {
-        	LOG.debug("anagramsEntities.size(): " + anagramsEntities.size());
-        	LOG.debug("anagramsEntities: " + anagramsEntities);
+        	LOG.debug("wordsEntities.size(): " + wordsEntities.size());
+        	LOG.debug("wordsEntities: " + wordsEntities);
         }
         
-        for (AnagramEntity anagramEntity : anagramsEntities){
+        for (WordEntity wordEntity : wordsEntities){
         	try {
-				anagramCoreApiClient.postWord(dictionarApiHost, anagramEntity.getWord(), "1");
+				anagramCoreApiClient.postWord(dictionarApiHost, wordEntity.getWord(), "1");
 			} catch (AnagramCoreApiException e) {
 				final ExceptionEntity entity = e.getEntity();
 				LOG.error(entity.getErrorMessage());
@@ -116,11 +116,11 @@ public class GetWordsFromDictionaryServlet extends HttpServlet {
 //        final String typedWord = getFirstHttpAttributeStringValue(request, "text");
 //        final String word = getFirstHttpAttributeStringValue(request, "word");
 //        final String areDiacriticsPresent = getFirstHttpAttributeStringValue(request, "diacritics");
-//        final AnagramEntity anagramEntity = (AnagramEntity) request.getAttribute("anagramEntity");
+//        final WordEntity wordEntity = (WordEntity) request.getAttribute("wordEntity");
 //        
-//        if (anagramsEntities == null) {
+//        if (wordsEntities == null) {
 //        	try {
-//				anagramsEntities = anagramCoreApiClient.getWordAnagrams(dictionarApiHost, anagramEntity.getSortedWordChars(), Boolean.valueOf(areDiacriticsPresent));
+//				wordsEntities = anagramCoreApiClient.getWordAnagrams(dictionarApiHost, wordEntity.getSortedWordChars(), Boolean.valueOf(areDiacriticsPresent));
 //			} catch (AnagramCoreApiException e) {
 //				final ExceptionEntity entity = e.getEntity();
 //				LOG.error(entity.getErrorMessage());
@@ -128,7 +128,7 @@ public class GetWordsFromDictionaryServlet extends HttpServlet {
 //			}
 //        }
 //        
-//        boolean containsOnly2 = StringUtils.containsOnly(typedWord, anagramEntity.getWord());
+//        boolean containsOnly2 = StringUtils.containsOnly(typedWord, wordEntity.getWord());
 //
 //        if (LOG.isDebugEnabled()) {
 //    		LOG.debug("word: " + word);

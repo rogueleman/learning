@@ -75,7 +75,7 @@
 								Scrie aici:<br/>
 								<input type="text" id="text" name="text" class="inputText" autocomplete="off" />
 								<input type="hidden" id="word" name="word" value="<%=word%>">  
-								<input type="hidden" id="anagramEntity" name="anagramEntity" value="<%=request.getAttribute("anagramEntity")%>">  
+								<input type="hidden" id="wordEntity" name="wordEntity" value="<%=request.getAttribute("wordEntity")%>">  
 							</p>
 							<p>
 								<a class="button" href="javascript:verifyField();" onclick="this.blur();">

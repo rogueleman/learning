@@ -21,8 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.emailvision.commons.api.restful.resources.AbstractRestFulResource;
-import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
-import com.leman.core.api.dictionar.server.anagram.services.IWordsService;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
+import com.leman.core.api.dictionar.server.anagram.services.IWordService;
 import com.sun.jersey.spi.resource.Singleton;
 
 @Path(WORD_RESOURCE_PATH)
@@ -32,20 +32,20 @@ import com.sun.jersey.spi.resource.Singleton;
 @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
 public class WordResource extends AbstractRestFulResource {
 	
-	private final IWordsService wordService;
+	private final IWordService wordService;
 
 	private static final String WORD_ID_REGEX_PATH = "{wordId: [0-9]+}";
 	private static final String WORD_ID_PATH = "wordId";
 
 	@Autowired
-	public WordResource(final IWordsService wordService) {
+	public WordResource(final IWordService wordService) {
 		this.wordService = wordService;
 	}
 	
 	@GET
 	@Path(RANDOM_RESOURCE_PATH)
 	public Response getRandomWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader) {
-		return buildGetResponse(requestHeader, wordService.getAnagramEntityForRandomWord());
+		return buildGetResponse(requestHeader, wordService.getWordEntityForRandomWord());
 	}
 
 	@POST
@@ -53,8 +53,8 @@ public class WordResource extends AbstractRestFulResource {
 		isNullThrowIllegalArgumentException(word, format(ERROR_MISSING_PARAMETER, "word"));
 		isNullThrowIllegalArgumentException(langId, format(ERROR_MISSING_PARAMETER, "lang"));
 		
-		AnagramEntity anagramEntity = wordService.postWord(word, langId);
-		return buildPutResponse(requestHeader, anagramEntity);
+		WordEntity wordEntity = wordService.postWord(word, langId);
+		return buildPutResponse(requestHeader, wordEntity);
 	}
 	
 //	@POST
@@ -71,7 +71,7 @@ public class WordResource extends AbstractRestFulResource {
 //		if (uploadedInputStream == null) {
 //			throw new IllegalArgumentException(format(ERROR_MISSING_PARAMETER, "fileImage"));
 //		}
-//		final AnagramEntity entity = wordService.postImage(managerId, clientId, clientImageQuotaUsed, clientImageMaxUsed, (name != null) ? name.trim() : name, (description != null) ? description.trim() : description, uploadedInputStream,
+//		final WordEntity entity = wordService.postImage(managerId, clientId, clientImageQuotaUsed, clientImageMaxUsed, (name != null) ? name.trim() : name, (description != null) ? description.trim() : description, uploadedInputStream,
 //				fileDetail);
 //		return buildPostResponse(requestHeader, entity, entity.getImageId());
 //	}
@@ -79,7 +79,7 @@ public class WordResource extends AbstractRestFulResource {
 //	@PUT
 //	@Path(WORD_ID_REGEX_PATH)
 //	public Response putImage(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_MANAGER_IDS) final List<Long> managerIds, @PathParam(WORD_ID_PATH) final Long imageId, 
-//			final AnagramEntity entity) {
+//			final WordEntity entity) {
 //		isBlankListThrowIllegalArgumentException(managerIds, format(ERROR_MISSING_PARAMETER, "managerIds"));
 //		wordService.putImage(managerIds, imageId, entity.getName(), entity.getDescription());
 //		return buildPutResponse(requestHeader, entity);

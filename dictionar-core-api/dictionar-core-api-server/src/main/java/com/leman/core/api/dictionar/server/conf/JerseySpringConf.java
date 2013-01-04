@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-import com.leman.core.data.dictionar.spring.config.AnagramDatabaseConfiguration;
+import com.leman.core.data.dictionar.spring.config.DictionarDatabaseConfiguration;
 
 @Configuration
 @ComponentScan(basePackages = { "com.leman.core.api.dictionar.server.anagram.services", "com.leman.core.api.dictionar.server.anagram.resources"}, excludeFilters = { @Filter(type = FilterType.ANNOTATION, value = Configuration.class) })
 @PropertySource({"file:/etc/emv/dictionar-core/global.properties"})
-@Import({AnagramDatabaseConfiguration.class})
+@Import({DictionarDatabaseConfiguration.class})
 public class JerseySpringConf {
 	
 	@Bean

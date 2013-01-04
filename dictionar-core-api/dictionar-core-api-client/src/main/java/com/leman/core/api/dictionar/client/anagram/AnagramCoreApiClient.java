@@ -24,7 +24,7 @@ import javax.ws.rs.core.UriBuilder;
 import com.emailvision.commons.api.restful.exceptions.entity.ExceptionEntity;
 import com.emailvision.commons.api.restful.utils.ClientHelper;
 import com.leman.core.api.dictionar.client.AbstractDictionarCoreApiClient;
-import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
@@ -42,7 +42,7 @@ public final class AnagramCoreApiClient extends AbstractDictionarCoreApiClient {
 		super(timeout, debugMode);
 	}
 	
-	public AnagramEntity getRandomWord(final String hostname) throws AnagramCoreApiException, IOException {
+	public WordEntity getRandomWord(final String hostname) throws AnagramCoreApiException, IOException {
 		
 		isBlankThrowIllegalArgumentException(hostname, format(ERROR_MISSING_PARAMETER, "hostname"));
 		
@@ -50,10 +50,10 @@ public final class AnagramCoreApiClient extends AbstractDictionarCoreApiClient {
 		
 		checkResponseStatus(clientResponse);
 		
-		return clientResponse.getEntity(AnagramEntity.class);
+		return clientResponse.getEntity(WordEntity.class);
 	}
 
-	public Set<AnagramEntity> getWordAnagrams(final String hostname, final String sortedChars, final Boolean areDiacriticsPresent) throws AnagramCoreApiException, IOException {
+	public Set<WordEntity> getWordAnagrams(final String hostname, final String sortedChars, final Boolean areDiacriticsPresent) throws AnagramCoreApiException, IOException {
 		
 		isBlankThrowIllegalArgumentException(hostname, format(ERROR_MISSING_PARAMETER, "hostname"));
 		
@@ -61,11 +61,11 @@ public final class AnagramCoreApiClient extends AbstractDictionarCoreApiClient {
 		
 		checkResponseStatus(clientResponse);
 		
-		return clientResponse.getEntity(new GenericType<HashSet<AnagramEntity>>() {});
+		return clientResponse.getEntity(new GenericType<HashSet<WordEntity>>() {});
 	}
 
 	
-	public AnagramEntity postWord(final String hostname, final String word, final String langId) throws AnagramCoreApiException, IOException {
+	public WordEntity postWord(final String hostname, final String word, final String langId) throws AnagramCoreApiException, IOException {
 
 		isBlankThrowIllegalArgumentException(hostname, format(ERROR_MISSING_PARAMETER, "hostname"));
 		isBlankThrowIllegalArgumentException(word, format(ERROR_MISSING_PARAMETER, "word"));
@@ -78,11 +78,11 @@ public final class AnagramCoreApiClient extends AbstractDictionarCoreApiClient {
 		final ClientResponse clientResponse = getPartialRequestBuilder(queryParams, UriBuilder.fromUri(format(dictionarCoreApiServerFormat, hostname)).build(), new String[] {WORD_RESOURCE_PATH}).post(ClientResponse.class);
 		checkResponseStatus(clientResponse);
 
-		return clientResponse.getEntity(AnagramEntity.class);
+		return clientResponse.getEntity(WordEntity.class);
 	}	
 	
 
-	public Set<AnagramEntity> getWordsFromDefinition(final String hostname, final String search) throws AnagramCoreApiException, IOException {
+	public Set<WordEntity> getWordsFromDefinition(final String hostname, final String search) throws AnagramCoreApiException, IOException {
 		
 		isBlankThrowIllegalArgumentException(hostname, format(ERROR_MISSING_PARAMETER, "hostname"));
 		
@@ -90,7 +90,7 @@ public final class AnagramCoreApiClient extends AbstractDictionarCoreApiClient {
 		
 		checkResponseStatus(clientResponse);
 		
-		return clientResponse.getEntity(new GenericType<HashSet<AnagramEntity>>() {});
+		return clientResponse.getEntity(new GenericType<HashSet<WordEntity>>() {});
 	}
 	
 	

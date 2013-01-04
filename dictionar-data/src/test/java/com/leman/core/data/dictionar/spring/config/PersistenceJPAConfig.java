@@ -16,11 +16,11 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.leman.core.data.dictionar.jpa.Anagram;
+import com.leman.core.data.dictionar.jpa.Dictionar;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ Anagram.BASE_PACKAGE_REPOSITORY })
+@ComponentScan({ Dictionar.BASE_PACKAGE_REPOSITORY })
 public class PersistenceJPAConfig {
 
     @Bean
@@ -34,8 +34,8 @@ public class PersistenceJPAConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         final LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
-        factoryBean.setPackagesToScan(Anagram.BASE_PACKAGE_ENTITY);
-        factoryBean.setPersistenceUnitName(Anagram.PERSISTENCE_UNIT_NAME);
+        factoryBean.setPackagesToScan(Dictionar.BASE_PACKAGE_ENTITY);
+        factoryBean.setPersistenceUnitName(Dictionar.PERSISTENCE_UNIT_NAME);
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setShowSql(true);
         vendorAdapter.setGenerateDdl(true);

@@ -21,7 +21,7 @@ import com.emailvision.commons.properties.EmvProperties;
 import com.emailvision.commons.properties.IEmvProperties;
 import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClient;
 import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiException;
-import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
 
 @WebServlet("/AnagramStartServlet")
 public class AnagramStartServlet extends HttpServlet {
@@ -39,7 +39,7 @@ public class AnagramStartServlet extends HttpServlet {
     
     private static AnagramCoreApiClient anagramCoreApiClient;
     
-    private Set<AnagramEntity> anagramsEntities = null;
+    private Set<WordEntity> anagramsEntities = null;
     
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -73,21 +73,21 @@ public class AnagramStartServlet extends HttpServlet {
     	if (LOG.isDebugEnabled()) {
     		LOG.debug("Entering doGet AnagramStartServlet.....");
     	}
-    	final AnagramEntity anagramEntity;
+    	final WordEntity wordEntity;
     	
     	try {
-			anagramEntity = anagramCoreApiClient.getRandomWord(dictionarApiHost);
+			wordEntity = anagramCoreApiClient.getRandomWord(dictionarApiHost);
 		} catch (AnagramCoreApiException e) {
 			final ExceptionEntity entity = e.getEntity();
 			LOG.error(entity.getErrorMessage());
 			throw new ServletException(e);
 		}
 
-    	request.setAttribute("word", anagramEntity.getWord());
-    	request.setAttribute("anagramEntity", anagramEntity);
+    	request.setAttribute("word", wordEntity.getWord());
+    	request.setAttribute("wordEntity", wordEntity);
     	
     	if (LOG.isDebugEnabled()) {
-    		LOG.debug("anagramEntity.getWord(): " + anagramEntity.getWord());
+    		LOG.debug("wordEntity.getWord(): " + wordEntity.getWord());
     	}
     	
     	final String url = new String("/jsp/AnagramStart.jsp");
@@ -110,11 +110,11 @@ public class AnagramStartServlet extends HttpServlet {
         final String typedWord = getFirstHttpAttributeStringValue(request, "text");
         final String word = getFirstHttpAttributeStringValue(request, "word");
         final String areDiacriticsPresent = getFirstHttpAttributeStringValue(request, "diacritics");
-        final AnagramEntity anagramEntity = (AnagramEntity) request.getAttribute("anagramEntity");
+        final WordEntity wordEntity = (WordEntity) request.getAttribute("wordEntity");
         
         if (anagramsEntities == null) {
         	try {
-				anagramsEntities = anagramCoreApiClient.getWordAnagrams(dictionarApiHost, anagramEntity.getSortedWordChars(), Boolean.valueOf(areDiacriticsPresent));
+				anagramsEntities = anagramCoreApiClient.getWordAnagrams(dictionarApiHost, wordEntity.getSortedWordChars(), Boolean.valueOf(areDiacriticsPresent));
 			} catch (AnagramCoreApiException e) {
 				final ExceptionEntity entity = e.getEntity();
 				LOG.error(entity.getErrorMessage());
@@ -122,7 +122,7 @@ public class AnagramStartServlet extends HttpServlet {
 			}
         }
         
-        boolean containsOnly2 = StringUtils.containsOnly(typedWord, anagramEntity.getWord());
+        boolean containsOnly2 = StringUtils.containsOnly(typedWord, wordEntity.getWord());
 
         if (LOG.isDebugEnabled()) {
     		LOG.debug("word: " + word);

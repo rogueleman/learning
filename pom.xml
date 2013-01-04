@@ -20,6 +20,7 @@
 		<module>dictionar-data</module>
  		<module>dictionar-core-api</module>
 		<module>anagram</module> 
+		<module>anagram-data</module>
 	</modules>
 
 	<properties>

@@ -21,10 +21,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.emailvision.commons.api.restful.resources.AbstractRestFulResource;
-import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
 import com.leman.core.api.dictionar.common.anagram.entities.DefinitionEntity;
 import com.leman.core.api.dictionar.server.anagram.services.IDefinitionService;
-import com.leman.core.api.dictionar.server.anagram.services.IWordsService;
+import com.leman.core.api.dictionar.server.anagram.services.IWordService;
 import com.sun.jersey.spi.resource.Singleton;
 
 @Component
@@ -34,7 +34,7 @@ import com.sun.jersey.spi.resource.Singleton;
 @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
 public class WordsResource extends AbstractRestFulResource {
 
-	private final IWordsService wordsService;
+	private final IWordService wordService;
 	
 	private final IDefinitionService definitionService;
 
@@ -47,15 +47,15 @@ public class WordsResource extends AbstractRestFulResource {
 //	private static final String PAGE_NUMBER = "pageNumber";
 	
 	@Autowired
-	public WordsResource(final IWordsService wordsService, final IDefinitionService definitionService) {
-		this.wordsService = wordsService;
+	public WordsResource(final IWordService wordService, final IDefinitionService definitionService) {
+		this.wordService = wordService;
 		this.definitionService = definitionService;
 	}
 
 	@GET
 	public Response getAllAnagramListForWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_SORTED_CHARS) final String sortedChars, @QueryParam(QUERY_PARAM_ARE_DIACRITICS_PRESENTS) final Boolean areDiacriticsPresent) {
-		final Set<AnagramEntity> anagramEntities = wordsService.getAllAnagramListForWord(sortedChars, areDiacriticsPresent);
-		return buildGetResponse(requestHeader, new GenericEntity<Set<AnagramEntity>>(anagramEntities){});
+		final Set<WordEntity> anagramEntities = wordService.getAllAnagramListForWord(sortedChars, areDiacriticsPresent);
+		return buildGetResponse(requestHeader, new GenericEntity<Set<WordEntity>>(anagramEntities){});
 	}
 
 	
@@ -71,16 +71,16 @@ public class WordsResource extends AbstractRestFulResource {
 //	@Path(PAGE_NUMBER_REGEX_PATH)
 //	public Response getImageByPageNumber(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @PathParam(PAGE_NUMBER) final Integer pageNumber, @QueryParam(QUERY_PARAM_SEARCH) final String search, @QueryParam(QUERY_PARAM_ORDER) final String order, @QueryParam(QUERY_PARAM_SORT) final Sort sort, @QueryParam(QUERY_PARAM_MANAGER_IDS) final List<Long> managerIds) {
 //		isBlankListThrowIllegalArgumentException(managerIds, format(ERROR_MISSING_PARAMETER, "managerIds"));
-//		final List<AnagramEntity> imageEntities = wordsService.getArchives(pageNumber, search, order, sort, managerIds);
-//        return buildGetResponse(requestHeader, new GenericEntity<List<AnagramEntity>>(imageEntities){});
+//		final List<WordEntity> imageEntities = wordService.getArchives(pageNumber, search, order, sort, managerIds);
+//        return buildGetResponse(requestHeader, new GenericEntity<List<WordEntity>>(imageEntities){});
 //	}
 //
 //	@GET
 //	@Path(PAGE_NUMBER_AND_ITEM_REGEX_PATH)
 //	public Response getImageByPageNumberAndNbItemPerPage(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @PathParam(PAGE_NUMBER) final Integer pageNumber, @PathParam(NB_ITEM_PER_PAGE) final Integer nbItemPerPage, @QueryParam(QUERY_PARAM_SEARCH) final String search, @QueryParam(QUERY_PARAM_ORDER) final String order, @QueryParam(QUERY_PARAM_SORT) final Sort sort, @QueryParam(QUERY_PARAM_MANAGER_IDS) final List<Long> managerIds) {
 //		isBlankListThrowIllegalArgumentException(managerIds, format(ERROR_MISSING_PARAMETER, "managerIds"));
-//		final List<AnagramEntity> imageEntities = wordsService.getArchives(pageNumber, nbItemPerPage, search, order, sort, managerIds);
-//		return buildGetResponse(requestHeader, new GenericEntity<List<AnagramEntity>>(imageEntities){});
+//		final List<WordEntity> imageEntities = wordService.getArchives(pageNumber, nbItemPerPage, search, order, sort, managerIds);
+//		return buildGetResponse(requestHeader, new GenericEntity<List<WordEntity>>(imageEntities){});
 //	}
 
 }

@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.leman.core.api.dictionar.common.anagram.entities.AnagramEntity;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
 
 public class AnagramCoreApiClientTestITG {
 
@@ -24,10 +24,10 @@ public class AnagramCoreApiClientTestITG {
 //		//Given
 //		
 //		File imageFile = new File(getClass().getClassLoader().getResource("image.jpg").getFile().toString());
-//		AnagramEntity entity = new AnagramEntity();
+//		WordEntity entity = new WordEntity();
 //		
 //		//When
-//		final AnagramEntity response = anagramCoreApiClient.postImage(HOST_NAME, 146507L, 36362L, 0L, 500000L, imageFile, null, "description");
+//		final WordEntity response = anagramCoreApiClient.postImage(HOST_NAME, 146507L, 36362L, 0L, 500000L, imageFile, null, "description");
 //		
 //		//Then
 //		assertThat(entity).isEqualTo(response);
@@ -37,10 +37,10 @@ public class AnagramCoreApiClientTestITG {
 	public void should_test_get_word() throws AnagramCoreApiException, IOException {
 		//Given
 		
-		AnagramEntity entity = new AnagramEntity();
+		WordEntity entity = new WordEntity();
 		
 		//When
-		final AnagramEntity response = anagramCoreApiClient.getRandomWord(HOST_NAME);
+		final WordEntity response = anagramCoreApiClient.getRandomWord(HOST_NAME);
 		
 		//Then
 //		assertThat(entity).isEqualTo(response);
