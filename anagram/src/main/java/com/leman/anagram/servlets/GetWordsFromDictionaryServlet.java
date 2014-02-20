@@ -1,9 +1,12 @@
 package com.leman.anagram.servlets;
 
-import static java.text.MessageFormat.format;
-
-import java.io.IOException;
-import java.util.Set;
+import com.emailvision.commons.api.restful.exceptions.entity.ExceptionEntity;
+import com.emailvision.commons.properties.EmvProperties;
+import com.emailvision.commons.properties.IEmvProperties;
+import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClient;
+import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiException;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,15 +14,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Set;
 
-import org.apache.log4j.Logger;
-
-import com.emailvision.commons.api.restful.exceptions.entity.ExceptionEntity;
-import com.emailvision.commons.properties.EmvProperties;
-import com.emailvision.commons.properties.IEmvProperties;
-import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClient;
-import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiException;
-import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
+import static java.text.MessageFormat.format;
 
 @WebServlet("/GetWordsFromDictionaryServlet")
 public class GetWordsFromDictionaryServlet extends HttpServlet {
@@ -60,12 +58,6 @@ public class GetWordsFromDictionaryServlet extends HttpServlet {
     	
     	anagramCoreApiClient = new AnagramCoreApiClient(dictionarApiUrlFormat, timeout, debugMode);
     }
-
-    @Override
-    public void destroy() {
-    	anagramCoreApiClient.destroy();
-    	super.destroy();
-    }
     
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
@@ -105,7 +97,7 @@ public class GetWordsFromDictionaryServlet extends HttpServlet {
         
         for (WordEntity wordEntity : wordsEntities){
         	try {
-				anagramCoreApiClient.postWord(dictionarApiHost, wordEntity.getWord(), "1");
+				anagramCoreApiClient.postWord(dictionarApiHost, wordEntity);
 			} catch (AnagramCoreApiException e) {
 				final ExceptionEntity entity = e.getEntity();
 				LOG.error(entity.getErrorMessage());

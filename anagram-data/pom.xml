@@ -17,12 +17,12 @@
  		<dependency>
 			<groupId>com.emailvision</groupId>
 			<artifactId>emv-jpa-core</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>1.8-SNAPSHOT</version>
 		</dependency>
  		<dependency>
 			<groupId>com.emailvision</groupId>
 			<artifactId>emv-commons-pool</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>0.7-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.leman</groupId>

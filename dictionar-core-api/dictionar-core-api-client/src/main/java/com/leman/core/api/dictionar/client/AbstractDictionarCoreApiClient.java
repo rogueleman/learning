@@ -1,12 +1,12 @@
 package com.leman.core.api.dictionar.client;
 
-import static com.emailvision.commons.api.restful.utils.ClientHelper.createClient;
-
 import org.apache.commons.lang.StringUtils;
 
-import com.sun.jersey.api.client.Client;
+import javax.ws.rs.client.Client;
 
-public abstract class AbstractDictionarCoreApiClient {
+import static com.emailvision.commons.api.restful.support.ClientHelper.create;
+
+public class AbstractDictionarCoreApiClient implements IAbstractDictionarCoreApiClient{
 
 	public static final String PROPS_KEY_DICTIONAR_API_SERVER_FORMAT = "dictionar.api.url.format";
 	public static final String DEFAULT_DICTIONAR_API_SERVER_FORMAT = "https://{0}/dictionar-core"; 
@@ -24,15 +24,15 @@ public abstract class AbstractDictionarCoreApiClient {
 		}
 
 		this.dictionarCoreApiServerFormat = dictionarCoreApiServerFormat;
-		this.client = createClient(timeout, debugMode);
-		this.client.setFollowRedirects(true);
+		this.client = create(timeout, debugMode);
 	}
 	
 	public AbstractDictionarCoreApiClient(final Integer timeout, final Boolean debugMode) {
 		this(DEFAULT_DICTIONAR_API_SERVER_FORMAT, timeout, debugMode);
 	}
-	
-	public void destroy() {
-		client.destroy();
-	}
+
+    @Override
+    public void close() {
+        client.close();
+    }
 }

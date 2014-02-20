@@ -103,7 +103,7 @@
 		<dependency>
 			<artifactId>emv-commons-pool</artifactId>
 			<groupId>com.emailvision</groupId>
-			<version>0.2-SNAPSHOT</version>
+			<version>0.7-SNAPSHOT</version>
 		</dependency>
 <!-- 		<dependency>
 			<groupId>com.emailvision</groupId>

@@ -1,8 +1,8 @@
 package com.leman.core.api.dictionar.common.anagram;
 
-import com.emailvision.commons.api.restful.utils.GenericResourcePath;
+public final class ResourcePath {
 
-public final class ResourcePath extends GenericResourcePath {
+	public static final String ERROR_MISSING_PARAMETER = "Missing parameter: {0}";
 
 	public static final String WORDS_RESOURCE_PATH = "words";
 	public static final String WORD_RESOURCE_PATH = "word";

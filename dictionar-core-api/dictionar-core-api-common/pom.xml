@@ -14,7 +14,7 @@
 		<dependency>
 			<groupId>com.emailvision</groupId>
 			<artifactId>emv-commons-i18n</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>1.5-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

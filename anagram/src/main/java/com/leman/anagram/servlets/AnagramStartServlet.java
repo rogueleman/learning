@@ -1,10 +1,13 @@
 package com.leman.anagram.servlets;
 
-import static java.text.MessageFormat.format;
-import static com.emailvision.commons.http.utils.ParamChecker.getFirstHttpAttributeStringValue;
-
-import java.io.IOException;
-import java.util.Set;
+import com.emailvision.commons.api.restful.exceptions.entity.ExceptionEntity;
+import com.emailvision.commons.properties.EmvProperties;
+import com.emailvision.commons.properties.IEmvProperties;
+import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClient;
+import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiException;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -12,16 +15,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-
-import com.emailvision.commons.api.restful.exceptions.entity.ExceptionEntity;
-import com.emailvision.commons.properties.EmvProperties;
-import com.emailvision.commons.properties.IEmvProperties;
-import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClient;
-import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiException;
-import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
+import static com.emailvision.commons.http.utils.ParamChecker.getFirstHttpAttributeStringValue;
+import static java.text.MessageFormat.format;
 
 @WebServlet("/AnagramStartServlet")
 public class AnagramStartServlet extends HttpServlet {
@@ -62,12 +60,6 @@ public class AnagramStartServlet extends HttpServlet {
     	anagramCoreApiClient = new AnagramCoreApiClient(dictionarApiUrlFormat, timeout, debugMode);
     }
 
-    @Override
-    public void destroy() {
-    	anagramCoreApiClient.destroy();
-    	super.destroy();
-    }
-    
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
     	if (LOG.isDebugEnabled()) {
