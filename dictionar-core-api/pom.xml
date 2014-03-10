@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>com.emailvision</groupId>
 			<artifactId>emv-commons-api-rest</artifactId>
-			<version>2.5-SNAPSHOT</version>
+			<version>2.7-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>crypto</artifactId>
