@@ -27,70 +27,30 @@
 			<artifactId>dictionar-core-api-client</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-core</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-json</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.ext</groupId>
+            <artifactId>jersey-spring3</artifactId>
+            <version>${jersey.version.2}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>cglib</artifactId>
+                    <groupId>org.glassfish.hk2.external</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jettison</artifactId>
+            <version>${jersey.version.2}</version>
+        </dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey.contribs</groupId>
-			<artifactId>jersey-spring</artifactId>
-			<version>${jersey.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-web</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-beans</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-context</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-aop</artifactId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
@@ -105,32 +65,14 @@
 			<groupId>com.emailvision</groupId>
 			<version>0.7-SNAPSHOT</version>
 		</dependency>
-<!-- 		<dependency>
-			<groupId>com.emailvision</groupId>
-			<artifactId>oraclehelper</artifactId>
-			<version>0.3-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency> -->
 
 		<!-- Test -->
-		<dependency>
-			<groupId>com.sun.jersey.jersey-test-framework</groupId>
-			<artifactId>jersey-test-framework-core</artifactId>
-			<version>${jersey.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey.jersey-test-framework</groupId>
-			<artifactId>jersey-test-framework-grizzly</artifactId>
-			<version>${jersey.version}</version>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>servlet-api</artifactId>
-					<groupId>javax.servlet</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+            <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
+            <version>${jersey.version}</version>
+            <scope>test</scope>
+        </dependency>
 
 	</dependencies>
 	<build>
