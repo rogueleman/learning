@@ -32,19 +32,24 @@
 
 		<download.lib.enable>true</download.lib.enable>
 
-		<gwt.version>2.4.0</gwt.version>
-		<json.version>20090211</json.version>
-		<hibernate.version>4.1.2.Final</hibernate.version>
-		<ehcache.version>2.5.2</ehcache.version>
-		<spring.version>3.1.1.RELEASE</spring.version>
-		<cglib.version>2.2.2</cglib.version>
-		<javassist.version>3.16.1-GA</javassist.version>
-		<jersey.version>1.12</jersey.version>
-		<h2.version>1.3.165</h2.version>
-		<slf4j.version>1.6.4</slf4j.version>
-		<ant.contrib.version></ant.contrib.version>
-		<dbunit.version>2.4.9</dbunit.version>
-		<hibernate.jpamodelgen.version>1.2.0.Final</hibernate.jpamodelgen.version>
+
+        <spring.version>3.2.8.RELEASE</spring.version>
+        <springockito.version>1.0.9</springockito.version>
+        <hibernate.version>4.2.10.Final</hibernate.version>
+        <ehcache.version>2.6.6</ehcache.version>
+        <cglib.version>3.0</cglib.version>
+        <javassist.version>3.18.1-GA</javassist.version>
+        <jersey.version>2.6</jersey.version>
+        <jersey.version.2>2.6</jersey.version.2>
+        <h2.version>1.3.165</h2.version>
+        <slf4j.version>1.7.5</slf4j.version>
+        <dbunit.version>2.4.9</dbunit.version>
+        <hibernate.jpamodelgen.version>1.3.0.Final</hibernate.jpamodelgen.version>
+        <tomcat-servlet-api.version>7.0.42</tomcat-servlet-api.version>
+        <emv-commons-api-rest.version.2>2.5</emv-commons-api-rest.version.2>
+        <emv-commons-spring.version>1.3</emv-commons-spring.version>
+        <emv-patch-spring-orm.version>1.0</emv-patch-spring-orm.version>
+
 	</properties>
 
 <!--  	<distributionManagement>
@@ -71,6 +76,74 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
+        <dependency>
+            <groupId>com.emailvision</groupId>
+            <artifactId>emv-commons-spring</artifactId>
+            <version>${emv-commons-spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.emailvision</groupId>
+            <artifactId>emv-patch-spring-orm</artifactId>
+            <version>${emv-patch-spring-orm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- PROVIDED -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>${tomcat-servlet-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
 		<!-- TEST -->
 		<dependency>
@@ -97,6 +170,24 @@
 			<version>1.2</version>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.kubek2k</groupId>
+            <artifactId>springockito</artifactId>
+            <version>${springockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.kubek2k</groupId>
+            <artifactId>springockito-annotations</artifactId>
+            <version>${springockito.version}</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>		
