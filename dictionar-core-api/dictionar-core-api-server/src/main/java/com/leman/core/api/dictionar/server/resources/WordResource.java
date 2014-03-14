@@ -1,12 +1,12 @@
-package com.leman.core.api.dictionar.server.anagram.resources;
+package com.leman.core.api.dictionar.server.resources;
 
 import com.emailvision.commons.api.restful.resources.AbstractRestFulResource;
 import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
-import com.leman.core.api.dictionar.server.anagram.services.IWordService;
-import com.sun.jersey.spi.resource.Singleton;
+import com.leman.core.api.dictionar.server.services.IWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,9 +25,6 @@ public class WordResource extends AbstractRestFulResource {
 	
 	private final IWordService wordService;
 
-	private static final String WORD_ID_REGEX_PATH = "{wordId: [0-9]+}";
-	private static final String WORD_ID_PATH = "wordId";
-
 	@Autowired
 	public WordResource(final IWordService wordService) {
 		this.wordService = wordService;
@@ -40,11 +37,10 @@ public class WordResource extends AbstractRestFulResource {
 	}
 
 	@POST
-	public Response postWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, final String word, final Integer langId) throws IOException{
-		isNullThrowIllegalArgumentException(word, format(ERROR_MISSING_PARAMETER, "word"));
-		isNullThrowIllegalArgumentException(langId, format(ERROR_MISSING_PARAMETER, "lang"));
+	public Response postWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, final WordEntity wordEntity) throws IOException{
+		isNullThrowIllegalArgumentException(wordEntity.getWord(), format(ERROR_MISSING_PARAMETER, "word"));
+		isNullThrowIllegalArgumentException(wordEntity.getLang(), format(ERROR_MISSING_PARAMETER, "lang"));
 		
-		WordEntity wordEntity = wordService.postWord(word, langId);
-		return buildPutResponse(requestHeader, wordEntity);
+		return buildPutResponse(requestHeader, wordService.postWord(wordEntity.getWord(), 1));
 	}
 }

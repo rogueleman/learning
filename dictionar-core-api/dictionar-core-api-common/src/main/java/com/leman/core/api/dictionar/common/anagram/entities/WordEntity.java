@@ -46,21 +46,6 @@ public class WordEntity {
 		
 	}
 	
-	/**
-	 * 
-	 * @param imageId
-	 * @param name
-	 * @param description
-	 * @param url
-	 * @param urlThumb
-	 * @param size
-	 * @param height
-	 * @param width
-	 * @param dateCreation
-	 * @param dateModification
-	 * @param dateLastUse
-	 * @param managerId
-	 */
 	public WordEntity(final Long id, final String lang, final String word, final String wordWithoutDiacritics, final String sortedWordChars, final String sortedWordCharsWithoutDiacritics, final Integer wordLength) {
 		this.id = id;
 		this.lang = lang;

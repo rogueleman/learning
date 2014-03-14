@@ -11,11 +11,26 @@
 	<artifactId>dictionar-core-api-common</artifactId>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.emailvision</groupId>
-			<artifactId>emv-commons-i18n</artifactId>
-			<version>1.5-SNAPSHOT</version>
-		</dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-jaxrs</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-xc</artifactId>
+            <optional>true</optional>
+        </dependency>
 	</dependencies>
 
 </project>

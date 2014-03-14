@@ -1,7 +1,7 @@
 package com.leman.core.api.dictionar.client.anagram;
 
 import com.emailvision.commons.api.restful.exceptions.entity.ExceptionEntity;
-import com.sun.jersey.api.client.ClientResponse.Status;
+import javax.ws.rs.core.Response.Status;
 
 public class AnagramCoreApiException extends Exception {
 

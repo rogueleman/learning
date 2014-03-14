@@ -1,4 +1,4 @@
-package com.leman.core.api.dictionar.server.anagram.resources;
+package com.leman.core.api.dictionar.server.resources;
 
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_ARE_DIACRITICS_PRESENTS;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_DEFINITION_SEARCH;
@@ -7,6 +7,7 @@ import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORDS_RES
 
 import java.util.Set;
 
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -23,13 +24,12 @@ import org.springframework.stereotype.Component;
 import com.emailvision.commons.api.restful.resources.AbstractRestFulResource;
 import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
 import com.leman.core.api.dictionar.common.anagram.entities.DefinitionEntity;
-import com.leman.core.api.dictionar.server.anagram.services.IDefinitionService;
-import com.leman.core.api.dictionar.server.anagram.services.IWordService;
-import com.sun.jersey.spi.resource.Singleton;
+import com.leman.core.api.dictionar.server.services.IDefinitionService;
+import com.leman.core.api.dictionar.server.services.IWordService;
 
 @Component
-@Singleton
 @Path(WORDS_RESOURCE_PATH)
+@Singleton
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
 public class WordsResource extends AbstractRestFulResource {

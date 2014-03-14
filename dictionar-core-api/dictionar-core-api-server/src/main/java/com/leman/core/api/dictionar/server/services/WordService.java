@@ -1,4 +1,4 @@
-package com.leman.core.api.dictionar.server.anagram.services;
+package com.leman.core.api.dictionar.server.services;
 
 import java.io.IOException;
 import java.text.Normalizer;
