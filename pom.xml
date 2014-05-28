@@ -18,9 +18,9 @@
 	<modules>
 		<module>dictionar-lib</module>
 		<module>dictionar-data</module>
- 		<module>dictionar-core-api</module>
-		<module>anagram</module> 
-		<module>anagram-data</module>
+        <module>anagram-data</module>
+        <module>dictionar-core-api</module>
+        <module>anagram</module>
 	</modules>
 
 	<properties>
@@ -32,7 +32,7 @@
 		<joda.version>2.1</joda.version>
 		<emv.jpa.version>1.8-SNAPSHOT</emv.jpa.version>
 		<emv.pool.version>0.1-SNAPSHOT</emv.pool.version>
-		<emv.constant.version>2.1-SNAPSHOT</emv.constant.version>
+		<emv.constant.version>2.5-SNAPSHOT</emv.constant.version>
 		<oracle.helper.version>0.2-SNAPSHOT</oracle.helper.version>
 		<hibernate.jpamodelgen.version>1.2.0.Final</hibernate.jpamodelgen.version>
 	</properties>
@@ -81,7 +81,7 @@
 		<dependency>
 			<groupId>com.emailvision</groupId>
 			<artifactId>emv-commons-test</artifactId>
-			<version>1.3-SNAPSHOT</version>
+			<version>1.4-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 

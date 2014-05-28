@@ -8,8 +8,10 @@ import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiException;
 import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +40,7 @@ public class AnagramStartServlet extends HttpServlet {
     private static AnagramCoreApiClient anagramCoreApiClient;
     
     private Set<WordEntity> anagramsEntities = null;
-    
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
