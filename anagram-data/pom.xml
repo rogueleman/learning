@@ -13,21 +13,29 @@
     	<version>0.0.1</version>
     </parent>
 
+    <properties>
+        <emv-commons-spring.version>1.3</emv-commons-spring.version>
+        <emv-jpa-core.version>1.8</emv-jpa-core.version>
+        <emv-commons-pool.version>0.6</emv-commons-pool.version>
+        <dictionar-lib.version>0.1-SNAPSHOT</dictionar-lib.version>
+        <mysql-connector-java.version>5.1.13</mysql-connector-java.version>
+    </properties>
+
 	<dependencies>
  		<dependency>
 			<groupId>com.emailvision</groupId>
 			<artifactId>emv-jpa-core</artifactId>
-			<version>1.8-SNAPSHOT</version>
+			<version>${emv-jpa-core.version}</version>
 		</dependency>
  		<dependency>
 			<groupId>com.emailvision</groupId>
 			<artifactId>emv-commons-pool</artifactId>
-			<version>0.7-SNAPSHOT</version>
+			<version>${emv-commons-pool.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.leman</groupId>
 			<artifactId>dictionar-lib</artifactId>
-			<version>0.1-SNAPSHOT</version>
+			<version>${dictionar-lib.version}</version>
 		</dependency>		
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -49,7 +57,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.13</version>
+			<version>${mysql-connector-java.version}</version>
 		</dependency>		
 		<dependency>
 			<groupId>com.h2database</groupId>

@@ -10,6 +10,11 @@
 	
 	<artifactId>dictionar-core-api-server</artifactId>
 	<packaging>war</packaging>
+
+    <properties>
+        <emv-commons-pool.version>0.6</emv-commons-pool.version>
+        <freemarker.version>2.3.19</freemarker.version>
+    </properties>
 	
 	<dependencies>
 		<dependency>
@@ -56,14 +61,14 @@
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
-			<version>2.3.19</version>
+			<version>${freemarker.version}</version>
 		</dependency>
 
 		<!-- Runtime -->
 		<dependency>
 			<artifactId>emv-commons-pool</artifactId>
 			<groupId>com.emailvision</groupId>
-			<version>0.7-SNAPSHOT</version>
+            <version>${emv-commons-pool.version}</version>
 		</dependency>
 
 		<!-- Test -->

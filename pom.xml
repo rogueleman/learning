@@ -32,7 +32,8 @@
 		<joda.version>2.1</joda.version>
 		<emv.jpa.version>1.8-SNAPSHOT</emv.jpa.version>
 		<emv.pool.version>0.1-SNAPSHOT</emv.pool.version>
-		<emv.constant.version>2.5-SNAPSHOT</emv.constant.version>
+		<emv.constant.version>2.9-SNAPSHOT</emv.constant.version>
+        <emv-commons-test.version>1.6-SNAPSHOT</emv-commons-test.version>
 		<oracle.helper.version>0.2-SNAPSHOT</oracle.helper.version>
 		<hibernate.jpamodelgen.version>1.2.0.Final</hibernate.jpamodelgen.version>
 	</properties>
@@ -81,7 +82,7 @@
 		<dependency>
 			<groupId>com.emailvision</groupId>
 			<artifactId>emv-commons-test</artifactId>
-			<version>1.4-SNAPSHOT</version>
+			<version>${emv-commons-test.version}</version>
 			<scope>test</scope>
 		</dependency>
 
