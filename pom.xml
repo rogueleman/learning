@@ -21,7 +21,8 @@
         <module>anagram-data</module>
         <module>dictionar-core-api</module>
         <module>anagram</module>
-	</modules>
+        <module>file-header</module>
+    </modules>
 
 	<properties>
 		<guava.version>11.0.2</guava.version>
