@@ -11,13 +11,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 
+import com.leman.anagram.Language;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.emailvision.data.jpa.domain.IEntity;
-import com.leman.anagram.Language;
 
 @Entity(name = "Word")
 @Table(name = "Word")
@@ -50,7 +50,7 @@ public class Word implements IEntity<Long>{
 	@Column(columnDefinition="NVARCHAR(100)")
 	private String sortedWordCharsWithoutDiacritics;
 	
-	@Column()
+	@Column
 	private Integer wordLength;
 	
 	public Word() {

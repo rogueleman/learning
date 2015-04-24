@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1155892989">
+    <data-source source="LOCAL" name="PostgreSQL - dictionar@192.168.255.4" uuid="9b9dae9d-5302-4188-922d-27660e55e373">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://192.168.255.4:5432/dictionar</jdbc-url>
+      <user-name>dev</user-name>
+      <user-password>dfcedfcfdfdcdfeadf9bdf98df99</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
