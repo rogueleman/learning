@@ -11,5 +11,5 @@ CREATE TABLE word (
   wordLength                              NUMERIC(3,0) NOT NULL,
   date_created                            TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
   date_updated                            TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
-  --UNIQUE (name)
+  UNIQUE (id)
 );

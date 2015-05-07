@@ -44,3 +44,14 @@ vagrant ssh tomcat
 http://docs.vagrantup.com/v2/cli/reload.html
 vagrant provision --provision-with tomcat
 
+2.6.3 War on Vm tomcat
+cp /local00/sources/learning/dictionar-core-api/dictionar-core-api-server/target/dictionar-core.war
+/local00/sources/learning/vagrant/webapps
+vagrant ssh tomcat
+sudo cp /vagrant/webapps/* /var/lib/tomcat7/webapps/
+
+
+
+
+
+
