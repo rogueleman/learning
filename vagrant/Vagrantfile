@@ -24,16 +24,34 @@ Vagrant.configure("2") do |config|
          fdmpg.vm.network :private_network, ip: "192.168.255.4"
     end
 
+#    # tomcat's VM
+#    # tomcat is installed via script "tomcat.sh"
+#    config.vm.define "tomcat" do |tomcat|
+#        tomcat.vm.box = "precise32"
+#        tomcat.vm.provision :shell, path: "provision_tomcat.sh"
+#    # to test
+#    #    tomcat.vm.provision copyWar, type: shell , path: "copyWar.sh"
+#        tomcat.vm.network :private_network, ip: '192.168.33.10'
+#        tomcat.vm.provider :virtualbox do |vb|
+#            vb.customize ["modifyvm", :id, "--memory", "1024"]
+#        end
+#    end
+
     # tomcat's VM
-    # tomcat is installed via script "tomcat.sh"
+    # configuration files are copied via script "provision_tomcat.sh"
     config.vm.define "tomcat" do |tomcat|
-        tomcat.vm.box = "precise32"
+        tomcat.vm.box = "manutomcat"
         tomcat.vm.provision :shell, path: "provision_tomcat.sh"
+    # to test
+    #    tomcat.vm.provision copyWar, type: shell , path: "copyWar.sh"
         tomcat.vm.network :private_network, ip: '192.168.33.10'
         tomcat.vm.provider :virtualbox do |vb|
             vb.customize ["modifyvm", :id, "--memory", "1024"]
+            vb.customize ["modifyvm", :id, "--cpus", "1"]
         end
     end
+
+
 
 #    config.vm.define "fdmmq" do |fdmmq|
 #          fdmmq.vm.box = "centos59"

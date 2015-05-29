@@ -1,4 +1,4 @@
-DELETE FROM word WHERE id in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
+DELETE FROM word WHERE id in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
 
 INSERT INTO word (id, lang, word, sortedWordChars, wordWithoutDiacritics, sortedWordCharsWithoutDiacritics, wordLength)
 VALUES (1, 1,'simplu', 'ilmpsu', 'simplu', 'ilmpsu', 5);
@@ -26,3 +26,7 @@ INSERT INTO word (id, lang, word, sortedWordChars, wordWithoutDiacritics, sorted
 VALUES (12, 1, 'mac', 'acm', 'mac', 'acm', 3);
 INSERT INTO word (id, lang, word, sortedWordChars, wordWithoutDiacritics, sortedWordCharsWithoutDiacritics, wordLength)
 VALUES (13, 1, 'mat', 'amt', 'mat', 'amt', 3);
+INSERT INTO word (id, lang, word, sortedWordChars, wordWithoutDiacritics, sortedWordCharsWithoutDiacritics, wordLength)
+VALUES (14, 1, 'slip', 'ilps', 'slip', 'ilps', 4);
+INSERT INTO word (id, lang, word, sortedWordChars, wordWithoutDiacritics, sortedWordCharsWithoutDiacritics, wordLength)
+VALUES (15, 1, 'puls', 'lpsu', 'puls', 'lpsu', 4);

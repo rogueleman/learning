@@ -9,6 +9,7 @@
 vagrant box add saucy64 http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box
 vagrant box add centos59 http://puppet-vagrant-boxes.puppetlabs.com/centos-59-x64-vbox4210-nocm.box
 vagrant box add precise32 http://files.vagrantup.com/precise32.box
+vagrant box add manutomcat SF_Centos6_Tomcat.box
 
 This commands should install vagrant boxes in your home directory
 
