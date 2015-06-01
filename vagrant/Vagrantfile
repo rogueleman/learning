@@ -1,18 +1,6 @@
 Vagrant.configure("2") do |config|
 
      config.vm.synced_folder "/tmp/vagrant_synced/", "/tmp/vagrant_synced", create: true
-
-#    config.vm.define "fdmcm" do |fdmcm|
-#        fdmcm.vm.box = "saucy64"
-#        fdmcm.vm.provision "shell", path: "provision_cm.sh"
-#        fdmcm.vm.hostname = "fdmcm"
-#        fdmcm.vm.provider :virtualbox do |vb|
-#            vb.customize ["modifyvm", :id, "--memory", "256"]
-#            vb.customize ["modifyvm", :id, "--cpus", "1"]
-#        end
-#        fdmcm.vm.network :private_network, ip: "192.168.255.3"
-#    end
-
     config.vm.define "fdmpg" do |fdmpg|
          fdmpg.vm.box = "precise32"
          fdmpg.vm.provision "shell", path: "provision_postgres.sh"
@@ -39,28 +27,17 @@ Vagrant.configure("2") do |config|
 
     # tomcat's VM
     # configuration files are copied via script "provision_tomcat.sh"
-    config.vm.define "tomcat" do |tomcat|
-        tomcat.vm.box = "manutomcat"
+    config.vm.define "tomcatManu" do |tomcat|
+        tomcat.vm.box = "tomcatManu"
         tomcat.vm.provision :shell, path: "provision_tomcat.sh"
     # to test
     #    tomcat.vm.provision copyWar, type: shell , path: "copyWar.sh"
-        tomcat.vm.network :private_network, ip: '192.168.33.10'
+    #    tomcat.vm.network :public_network, type: "dhcp", :bridge => "eth2"
+        tomcat.vm.network :private_network, ip: '192.168.33.11'
         tomcat.vm.provider :virtualbox do |vb|
             vb.customize ["modifyvm", :id, "--memory", "1024"]
             vb.customize ["modifyvm", :id, "--cpus", "1"]
         end
     end
 
-
-
-#    config.vm.define "fdmmq" do |fdmmq|
-#          fdmmq.vm.box = "centos59"
-#          fdmmq.vm.provision "shell", path: "provision_mq.sh"
-#          fdmmq.vm.hostname = "fdmmq"
-#          fdmmq.vm.provider :virtualbox do |vb|
-#               vb.customize ["modifyvm", :id, "--memory", "512"]
-#               vb.customize ["modifyvm", :id, "--cpus", "1"]
-#          end
-#          fdmmq.vm.network :private_network, ip: "192.168.255.5"
-#     end
 end
