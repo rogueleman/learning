@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.leman.anagram.Language;
+import com.leman.core.data.dictionar.jpa.domain.word.Word;
+import com.leman.core.data.dictionar.spring.config.PersistenceJPAConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,11 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.leman.anagram.Language;
-import com.leman.core.data.dictionar.jpa.domain.word.Word;
-import com.leman.core.data.dictionar.jpa.repository.word.IWordRepository;
-import com.leman.core.data.dictionar.spring.config.PersistenceJPAConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = PersistenceJPAConfig.class, loader = AnnotationConfigContextLoader.class)
@@ -40,7 +38,7 @@ public class WordRepositoryTestDB {
 		
 		List<Word> definitionList = wordRepository.getWords();
 
-		assertThat(definitionList.size()).isEqualTo(1);
+		assertThat(definitionList.size()).isEqualTo(2);
 		assertThat(definitionList.get(0).getWord().toLowerCase()).isEqualTo(LEXICON);
 		assertThat(definitionList.get(0).getWordLength()).isEqualTo(LEXICON.length());
 		
@@ -61,6 +59,6 @@ public class WordRepositoryTestDB {
 		
 		Long definitionList = wordRepository.getIdOfLastElementFromTable(Language.ro);
 
-		assertThat(definitionList).isEqualTo(2);
+		assertThat(definitionList).isEqualTo(4);
 	}
 }

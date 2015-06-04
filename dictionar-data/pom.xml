@@ -59,10 +59,15 @@
             <artifactId>cglib-nodep</artifactId>
             <version>${cglib.version}</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.3-1101-jdbc41</version>
         </dependency>
 
         <!-- PROVIDED -->

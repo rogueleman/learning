@@ -1,6 +1,9 @@
 1 Project
 
+examples of call
+http://192.168.33.11:8080/dictionar-core/word/random
 
+http://192.168.33.11:8080/anagram/jsp/AnagramStart.jsp
 
 
 2.4 Vagrant
