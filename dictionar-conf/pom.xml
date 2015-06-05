@@ -300,7 +300,7 @@
 
 	<profiles>
 		<profile>
-			<id>tomcat-deploy</id>
+			<id>vagrant-deploy</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -308,7 +308,7 @@
 						<artifactId>maven-antrun-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>tomcat-deploy-copy</id>
+								<id>vagrant-deploy-copy</id>
 								<configuration>
 									<tasks>
 										<taskdef classpathref="maven.runtime.classpath"
@@ -321,13 +321,13 @@
 											<then>
 												<delete failonerror="false">
 													<fileset
-														file="/usr/local/tomcat/webapps/${project.build.finalName}.war"></fileset>
-													<fileset dir="/usr/local/tomcat/webapps/${project.build.finalName}"></fileset>
+														file="/local00/sources/learning/vagrant/webapps/${project.build.finalName}.war"></fileset>
+													<fileset dir="/local00/sources/learning/vagrant/webapps/${project.build.finalName}"></fileset>
 													<fileset
 														dir="/usr/local/tomcat/work/Catalina/localhost/${project.build.finalName}"></fileset>
 												</delete>
 												<copy file="${basedir}/target/${project.build.finalName}.war"
-													todir="/usr/local/tomcat/webapps/" />												
+													todir="/local00/sources/learning/vagrant/webapps/" />
 											</then>
 											<else>
 												<echo message="No war file found." />

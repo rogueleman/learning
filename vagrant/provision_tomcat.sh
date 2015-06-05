@@ -1,7 +1,4 @@
 #!/bin/sh
-#sudo apt-get -y update
-#sudo apt-get -y install vim
-#sudo apt-get -y install tomcat7
 
 sudo mkdir -p /etc/emv/anagram
 sudo mkdir -p /etc/emv/dictionar-core

@@ -1,38 +1,24 @@
 Vagrant.configure("2") do |config|
+    config.vm.synced_folder "/tmp/vagrant_synced/", "/tmp/vagrant_synced", create: true
 
-     config.vm.synced_folder "/tmp/vagrant_synced/", "/tmp/vagrant_synced", create: true
-    config.vm.define "fdmpg" do |fdmpg|
-         fdmpg.vm.box = "precise32"
-         fdmpg.vm.provision "shell", path: "provision_postgres.sh"
-         fdmpg.vm.hostname = "fdmpg"
-         fdmpg.vm.provider :virtualbox do |vb|
+    config.vm.define "postgres" do |postgres|
+         postgres.vm.box = "precise32"
+         postgres.vm.provision "shell", path: "provision_postgres.sh"
+         postgres.vm.hostname = "fdmpg"
+         postgres.vm.provider :virtualbox do |vb|
               vb.customize ["modifyvm", :id, "--memory", "512"]
               vb.customize ["modifyvm", :id, "--cpus", "1"]
          end
-         fdmpg.vm.network :private_network, ip: "192.168.255.4"
+         postgres.vm.network :private_network, ip: "192.168.255.4"
     end
-
-#    # tomcat's VM
-#    # tomcat is installed via script "tomcat.sh"
-#    config.vm.define "tomcat" do |tomcat|
-#        tomcat.vm.box = "precise32"
-#        tomcat.vm.provision :shell, path: "provision_tomcat.sh"
-#    # to test
-#    #    tomcat.vm.provision copyWar, type: shell , path: "copyWar.sh"
-#        tomcat.vm.network :private_network, ip: '192.168.33.10'
-#        tomcat.vm.provider :virtualbox do |vb|
-#            vb.customize ["modifyvm", :id, "--memory", "1024"]
-#        end
-#    end
 
     # tomcat's VM
     # configuration files are copied via script "provision_tomcat.sh"
     config.vm.define "tomcatManu" do |tomcat|
         tomcat.vm.box = "tomcatManu"
         tomcat.vm.provision :shell, path: "provision_tomcat.sh"
-    # to test
-    #    tomcat.vm.provision copyWar, type: shell , path: "copyWar.sh"
-    #    tomcat.vm.network :public_network, type: "dhcp", :bridge => "eth2"
+        tomcat.vm.provision "restart_tomcat", type: "shell", inline: 'service tomcat restart'
+        tomcat.vm.provision "copy_war", type: "shell", path: "copy_war.sh"
         tomcat.vm.network :private_network, ip: '192.168.33.11'
         tomcat.vm.provider :virtualbox do |vb|
             vb.customize ["modifyvm", :id, "--memory", "1024"]

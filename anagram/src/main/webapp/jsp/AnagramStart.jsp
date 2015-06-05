@@ -14,10 +14,10 @@
 	<head>
 	<title>Anagram Start</title>
 	
-	<script language="javascript" type="text/javascript" src="./../anagram/js/jquery-1.3.2.min.js"></script>
+	<script language="javascript" type="text/javascript" src="./../js/jquery-1.3.2.min.js"></script>
 	
 	<!-- <link href="./../css/login.css" rel="stylesheet" type="text/css" /> -->
-  	
+
 	<script type="text/javascript" charset="utf-8">
 		
  		function verifyAnagram(){
@@ -28,7 +28,7 @@
 					$("#errorLabel").empty();
 					if(data.e == "ko") {
 						alert("ko");
-						$("#errorLabel").html(i18n.getString("ccmd.manager.changepwd.problems"));	
+						$("#errorLabel").html("KO");
                     } else {
                     	alert("else");
 						$("#errorLabel").hide();
@@ -41,7 +41,7 @@
 			$("#errorLabel").empty();
 			var a = $("#text").val();
 			if (a == "") {
-				$("#errorLabel").html(i18n.getString("ccmd.manager.changepwd.empty.password"));
+				$("#errorLabel").html("Error... please enter a word");
 			}
 			else {
 				verifyAnagram();
@@ -58,7 +58,7 @@
 	<body id="main">
 	Body	
 		<div id="container">
-			<form name="AnagramStartServletForm">
+			<form name="AnagramStartServletForm" <%--action="/AnagramStartServlet" method="get"--%>>
 			
 				<div class="containerTop"></div>
 				<div class="containerBackground">
@@ -72,7 +72,7 @@
 							<%=word%>
 							</p>
 							<p>
-								Scrie aici:<br/>
+								Write here:<br/>
 								<input type="text" id="text" name="text" class="inputText" autocomplete="off" />
 								<input type="hidden" id="word" name="word" value="<%=word%>">  
 								<input type="hidden" id="wordEntity" name="wordEntity" value="<%=request.getAttribute("wordEntity")%>">  

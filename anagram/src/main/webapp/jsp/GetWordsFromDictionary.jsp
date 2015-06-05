@@ -14,7 +14,7 @@
 	<head>
 	<title>Anagram Start</title>
 	
-	<script language="javascript" type="text/javascript" src="./../anagram/js/jquery-1.3.2.min.js"></script>
+	<script language="javascript" type="text/javascript" src="./../js/jquery-1.3.2.min.js"></script>
 	
 	<!-- <link href="./../css/login.css" rel="stylesheet" type="text/css" /> -->
   	
@@ -22,13 +22,13 @@
 		
  		function verifyAnagram(){
 			$.post(
-				'./../anagram/GetWordsFromDictionaryServlet',
+				'./../GetWordsFromDictionaryServlet',
 				$(document.forms.GetWordsFromDictionaryForm).serialize(),
 				function (data) {
 					$("#errorLabel").empty();
 					if(data.e == "ko") {
 						alert("ko");
-						$("#errorLabel").html(i18n.getString("ccmd.manager.changepwd.problems"));	
+						$("#errorLabel").html("KO");
                     } else {
                     	alert("else");
 						$("#errorLabel").hide();
@@ -41,7 +41,7 @@
 			$("#errorLabel").empty();
 			var a = $("#text").val();
 			if (a == "") {
-				$("#errorLabel").html(i18n.getString("ccmd.manager.changepwd.empty.password"));
+				$("#errorLabel").html("Error");
 			}
 			else {
 				verifyAnagram();

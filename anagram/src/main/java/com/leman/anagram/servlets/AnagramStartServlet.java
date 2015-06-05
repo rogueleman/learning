@@ -1,34 +1,35 @@
 package com.leman.anagram.servlets;
 
-import com.emailvision.commons.api.restful.exceptions.entity.ExceptionEntity;
-import com.emailvision.commons.properties.EmvProperties;
-import com.emailvision.commons.properties.IEmvProperties;
-import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClient;
-import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiException;
-import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import static java.text.MessageFormat.format;
+
+import java.io.IOException;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Set;
+
+import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiClient;
+import com.leman.core.api.dictionar.client.anagram.AnagramCoreApiException;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import static com.emailvision.commons.http.utils.ParamChecker.getFirstHttpAttributeStringValue;
-import static java.text.MessageFormat.format;
+
+import com.emailvision.commons.api.restful.exceptions.entity.ExceptionEntity;
+import com.emailvision.commons.properties.EmvProperties;
+import com.emailvision.commons.properties.IEmvProperties;
 
 @WebServlet("/AnagramStartServlet")
 public class AnagramStartServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 93312596895596119L;
     private static final Logger LOG = Logger.getLogger(AnagramStartServlet.class);
-      
+
     private IEmvProperties properties;
     
     private static Integer timeout;
@@ -43,10 +44,10 @@ public class AnagramStartServlet extends HttpServlet {
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        super.init(config);
         LOG.info(format("{0} initialized", getClass().getSimpleName()));
-        
+
         properties = (IEmvProperties) config.getServletContext().getAttribute(EmvProperties.CONTEXT_PROPERTIES_ATTRIBUTE);
+        LOG.info(format("properties {0}", properties));
 
         timeout = properties.getIntProperty(AnagramCoreApiClient.PROPS_KEY_DICTIONAR_API_CLIENT_TIMEOUT, 30000);
         debugMode = properties.getBoolProperty(AnagramCoreApiClient.PROPS_KEY_DICTIONAR_API_CLIENT_DEBUG, false);
@@ -64,6 +65,8 @@ public class AnagramStartServlet extends HttpServlet {
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+        super.doGet(request,response);
+        LOG.info("doGet");
     	if (LOG.isDebugEnabled()) {
     		LOG.debug("Entering doGet AnagramStartServlet.....");
     	}
@@ -97,6 +100,7 @@ public class AnagramStartServlet extends HttpServlet {
 
     @Override
     protected void doPost(final HttpServletRequest request, final HttpServletResponse resp) throws ServletException, IOException {
+        LOG.info("doPost");
         if (LOG.isDebugEnabled()) {
             LOG.debug("Entering doPost AnagramStartServlet.....");
         }

@@ -1,6 +1,6 @@
 package com.leman.core.data.anagram.jpa;
 
-import org.hibernate.dialect.MySQLDialect;
+import org.hibernate.dialect.PostgreSQL82Dialect;
 import org.springframework.orm.jpa.vendor.Database;
 
 /**
@@ -49,12 +49,14 @@ public final class Anagram {
     /**
      * The SQL Dialect specifying the database platform.
      */
-    public static final String DATASOURCE_PLATFORM = MySQLDialect.class.getName();
+    //public static final String DATASOURCE_PLATFORM = MySQLDialect.class.getName();
+    public static final String DATASOURCE_PLATFORM = PostgreSQL82Dialect.class.getName();
 
     /**
      * The database platform.
      */
-    public static final Database DATABASE = Database.MYSQL;
+    //public static final Database DATABASE = Database.MYSQL;
+    public static final Database DATABASE = Database.POSTGRESQL;
 
     /**
      * 
