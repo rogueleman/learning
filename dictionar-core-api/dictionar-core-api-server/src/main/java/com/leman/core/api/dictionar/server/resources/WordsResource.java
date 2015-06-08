@@ -5,6 +5,10 @@ import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PAR
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_SORTED_CHARS;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORDS_RESOURCE_PATH;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Singleton;
@@ -18,14 +22,14 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.leman.core.api.dictionar.common.anagram.entities.DefinitionEntity;
+import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
+import com.leman.core.api.dictionar.server.services.IDefinitionService;
+import com.leman.core.api.dictionar.server.services.IWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.emailvision.commons.api.restful.resources.AbstractRestFulResource;
-import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
-import com.leman.core.api.dictionar.common.anagram.entities.DefinitionEntity;
-import com.leman.core.api.dictionar.server.services.IDefinitionService;
-import com.leman.core.api.dictionar.server.services.IWordService;
 
 @Component
 @Path(WORDS_RESOURCE_PATH)
@@ -38,14 +42,6 @@ public class WordsResource extends AbstractRestFulResource {
 	
 	private final IDefinitionService definitionService;
 
-//	private static final String PAGE_NUMBER_REGEX_PATH = "{pageNumber: [0-9]+}";
-//
-//	private static final String PAGE_NUMBER_AND_ITEM_REGEX_PATH = PAGE_NUMBER_REGEX_PATH + "/{nbItemPerPage: [0-9]+}";
-//	
-//	private static final String NB_ITEM_PER_PAGE = "nbItemPerPage";
-//
-//	private static final String PAGE_NUMBER = "pageNumber";
-	
 	@Autowired
 	public WordsResource(final IWordService wordService, final IDefinitionService definitionService) {
 		this.wordService = wordService;
@@ -53,13 +49,22 @@ public class WordsResource extends AbstractRestFulResource {
 	}
 
 	@GET
-	public Response getAllAnagramListForWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_SORTED_CHARS) final String sortedChars, @QueryParam(QUERY_PARAM_ARE_DIACRITICS_PRESENTS) final Boolean areDiacriticsPresent) {
-		final Set<WordEntity> anagramEntities = wordService.getAllAnagramListForWord(sortedChars, areDiacriticsPresent);
+	public Response getAllAnagramListForWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_SORTED_CHARS) final String chars, @QueryParam(QUERY_PARAM_ARE_DIACRITICS_PRESENTS) final Boolean areDiacriticsPresent) {
+        final Set<WordEntity> anagramEntities = wordService.getAllAnagramListForWord(sortString(chars), areDiacriticsPresent);
 		return buildGetResponse(requestHeader, new GenericEntity<Set<WordEntity>>(anagramEntities){});
 	}
 
-	
-	@GET
+    private String sortString(String sortedChars) {
+        final List<String> myList = new ArrayList<>(Arrays.asList(sortedChars.toLowerCase().split("")));
+        Collections.sort(myList, String.CASE_INSENSITIVE_ORDER);
+        final StringBuilder sorted = new StringBuilder();
+        for (String s : myList) {
+            sorted.append(new StringBuilder(s));
+        }
+        return sorted.toString();
+    }
+
+    @GET
 	@Path(QUERY_PARAM_DEFINITION_SEARCH)
 	public Response getWordsFromDefinition(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_DEFINITION_SEARCH) final String search) {
 		final Set<DefinitionEntity> definitionEntities = definitionService.getDefinitionListWithBeginingChars(search);
