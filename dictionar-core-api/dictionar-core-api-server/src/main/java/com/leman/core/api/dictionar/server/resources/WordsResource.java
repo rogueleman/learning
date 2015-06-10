@@ -1,8 +1,8 @@
 package com.leman.core.api.dictionar.server.resources;
 
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_ARE_DIACRITICS_PRESENTS;
+import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_CHARS;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_DEFINITION_SEARCH;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_SORTED_CHARS;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORDS_RESOURCE_PATH;
 
 import java.util.ArrayList;
@@ -34,25 +34,48 @@ import com.emailvision.commons.api.restful.resources.AbstractRestFulResource;
 @Component
 @Path(WORDS_RESOURCE_PATH)
 @Singleton
-@Consumes({MediaType.APPLICATION_JSON})
-@Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
+@Consumes({ MediaType.APPLICATION_JSON })
+@Produces({ MediaType.APPLICATION_JSON + ";charset=utf-8" })
 public class WordsResource extends AbstractRestFulResource {
 
-	private final IWordService wordService;
-	
-	private final IDefinitionService definitionService;
+    private final IWordService wordService;
 
-	@Autowired
-	public WordsResource(final IWordService wordService, final IDefinitionService definitionService) {
-		this.wordService = wordService;
-		this.definitionService = definitionService;
-	}
+    private final IDefinitionService definitionService;
 
-	@GET
-	public Response getAllAnagramListForWord(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_SORTED_CHARS) final String chars, @QueryParam(QUERY_PARAM_ARE_DIACRITICS_PRESENTS) final Boolean areDiacriticsPresent) {
-        final Set<WordEntity> anagramEntities = wordService.getAllAnagramListForWord(sortString(chars), areDiacriticsPresent);
-		return buildGetResponse(requestHeader, new GenericEntity<Set<WordEntity>>(anagramEntities){});
-	}
+    @Autowired
+    public WordsResource(final IWordService wordService, final IDefinitionService definitionService) {
+        this.wordService = wordService;
+        this.definitionService = definitionService;
+    }
+
+    @GET
+    public Response getAllAnagramListForWord(
+            @HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader,
+            @QueryParam(QUERY_PARAM_CHARS) final String chars,
+            @QueryParam(QUERY_PARAM_ARE_DIACRITICS_PRESENTS) final Boolean areDiacriticsPresent) {
+        final Set<WordEntity> anagramEntities = wordService.getAllAnagramListForWord(sortString(chars),
+                                                                                     areDiacriticsPresent);
+        return buildGetResponse(requestHeader, new GenericEntity<Set<WordEntity>>(anagramEntities) {
+        });
+    }
+
+   /* @GET
+    public Response getAllAnagramListForWordAndSubWords(
+            @HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader,
+            @QueryParam(QUERY_PARAM_CHARS) final String chars,
+            @QueryParam(QUERY_PARAM_ARE_DIACRITICS_PRESENTS) final Boolean areDiacriticsPresent) {
+
+        final List<String> sortedCharsList= new ArrayList<>();
+        final String sorted = sortString(chars);
+        for (int i = 0; i<sorted.length();i++) {
+            sortedCharsList.add(sorted.substring(i));
+        }
+
+        final Set<WordEntity> anagramEntities = wordService.getAllAnagramListForWordAndSubWords(sortedCharsList,
+                                                                                                areDiacriticsPresent);
+        return buildGetResponse(requestHeader, new GenericEntity<Set<WordEntity>>(anagramEntities) {
+        });
+    }*/
 
     private String sortString(String sortedChars) {
         final List<String> myList = new ArrayList<>(Arrays.asList(sortedChars.toLowerCase().split("")));
@@ -65,13 +88,16 @@ public class WordsResource extends AbstractRestFulResource {
     }
 
     @GET
-	@Path(QUERY_PARAM_DEFINITION_SEARCH)
-	public Response getWordsFromDefinition(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @QueryParam(QUERY_PARAM_DEFINITION_SEARCH) final String search) {
-		final Set<DefinitionEntity> definitionEntities = definitionService.getDefinitionListWithBeginingChars(search);
-		return buildGetResponse(requestHeader, new GenericEntity<Set<DefinitionEntity>>(definitionEntities){});
-	}
-	
-	
+    @Path(QUERY_PARAM_DEFINITION_SEARCH)
+    public Response getWordsFromDefinition(
+            @HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader,
+            @QueryParam(QUERY_PARAM_DEFINITION_SEARCH) final String search) {
+        final Set<DefinitionEntity> definitionEntities = definitionService.getDefinitionListWithBeginingChars(search);
+        return buildGetResponse(requestHeader, new GenericEntity<Set<DefinitionEntity>>(definitionEntities) {
+        });
+    }
+
+
 //	@GET
 //	@Path(PAGE_NUMBER_REGEX_PATH)
 //	public Response getImageByPageNumber(@HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader, @PathParam(PAGE_NUMBER) final Integer pageNumber, @QueryParam(QUERY_PARAM_SEARCH) final String search, @QueryParam(QUERY_PARAM_ORDER) final String order, @QueryParam(QUERY_PARAM_SORT) final Sort sort, @QueryParam(QUERY_PARAM_MANAGER_IDS) final List<Long> managerIds) {

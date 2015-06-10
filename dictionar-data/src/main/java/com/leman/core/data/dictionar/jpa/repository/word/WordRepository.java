@@ -9,18 +9,19 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.stereotype.Repository;
-
-import com.emailvision.data.jpa.repository.AbstractGenericRepository;
 import com.leman.anagram.Language;
 import com.leman.core.data.dictionar.jpa.Dictionar;
 import com.leman.core.data.dictionar.jpa.domain.word.Word;
 import com.leman.core.data.dictionar.jpa.domain.word.Word_;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Repository;
+
+import com.emailvision.data.jpa.repository.AbstractGenericRepository;
 
 @Repository("wordRepository")
 public class WordRepository extends AbstractGenericRepository<Word, Long> implements IWordRepository {
@@ -58,7 +59,28 @@ public class WordRepository extends AbstractGenericRepository<Word, Long> implem
     	return findByCriteriaQuery(criteriaQuery.orderBy(criteriaBuilder.asc(fromWord.get(sortedCharsColumn))));
 	}
 
-	@Override
+    @Override
+    public List<Word> getWordsAndSubWords(final List<String> sortedChars, final Boolean areDiacriticsPresent) {
+        final CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+        final CriteriaQuery<Word> criteriaQuery = criteriaBuilder.createQuery(Word.class);
+        final Root<Word> fromWord = criteriaQuery.from(Word.class);
+
+        SingularAttribute<Word, String> sortedCharsColumn = Word_.sortedWordCharsWithoutDiacritics;
+
+        if (areDiacriticsPresent) {
+            sortedCharsColumn = Word_.sortedWordChars;
+        }
+
+        final Expression<String> exp = fromWord.get(sortedCharsColumn);
+        final Predicate predicate = exp.in(sortedChars);
+
+        criteriaQuery.where(predicate);
+
+        return findByCriteriaQuery(criteriaQuery.orderBy(criteriaBuilder.asc(exp)));
+    }
+
+
+    @Override
 	public Word findByWord(final String word, final Boolean areDiacriticsPresent) {
 		final CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
 		final CriteriaQuery<Word> criteriaQuery = criteriaBuilder.createQuery(Word.class);

@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class WordRepositoryTestDB {
 
 	private static final String LEXICON = "lexicon";
+
 	@Resource(name="wordRepository")
 	private IWordRepository wordRepository;
 	

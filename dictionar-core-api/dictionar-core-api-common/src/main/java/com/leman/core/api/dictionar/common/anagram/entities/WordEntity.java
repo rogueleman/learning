@@ -16,158 +16,163 @@ import org.apache.commons.lang.builder.ToStringStyle;
 @XmlRootElement(name = WordEntity.NAME)
 public class WordEntity {
 
-	public static final String NAME = "wordEntity";
-	
-	@XmlElement
-	private Long id;
-	
-	@XmlElement
-	private String lang;
-	
-	@XmlElement
-	private String sortedWordChars;
-	
-	@XmlElement
-	private String sortedWordCharsWithoutDiacritics;
-	
-	@XmlElement
-	private String word;
+    public static final String NAME = "wordEntity";
 
-	@XmlElement
-	private String wordWithoutDiacritics;
+    @XmlElement
+    private Long id;
 
-	@XmlElement
-	private Integer wordLength;
+    @XmlElement
+    private String lang;
 
-	/**
-	 * Default Constructor
-	 */
-	public WordEntity() {
-		
-	}
-	
-	public WordEntity(final Long id, final String lang, final String word, final String wordWithoutDiacritics, final String sortedWordChars, final String sortedWordCharsWithoutDiacritics, final Integer wordLength) {
-		this.id = id;
-		this.lang = lang;
-		this.sortedWordChars = sortedWordChars;
-		this.sortedWordCharsWithoutDiacritics = sortedWordCharsWithoutDiacritics;
-		this.word = word;
-		this.wordWithoutDiacritics = wordWithoutDiacritics;
-		this.wordLength = wordLength;
-	}
+    @XmlElement
+    private String sortedWordChars;
 
+    @XmlElement
+    private String sortedWordCharsWithoutDiacritics;
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
+    @XmlElement
+    private String word;
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @XmlElement
+    private String wordWithoutDiacritics;
 
-	/**
-	 * @return the lang
-	 */
-	public String getLang() {
-		return lang;
-	}
+    @XmlElement
+    private Integer wordLength;
 
-	/**
-	 * @param lang the lang to set
-	 */
-	public void setLang(String lang) {
-		this.lang = lang;
-	}
+    /**
+     * Default Constructor
+     */
+    public WordEntity() {
 
-	/**
-	 * @return the sortedWordChars
-	 */
-	public String getSortedWordChars() {
-		return sortedWordChars;
-	}
+    }
 
-	/**
-	 * @param sortedWordChars the sortedWordChars to set
-	 */
-	public void setSortedWordChars(String sortedWordChars) {
-		this.sortedWordChars = sortedWordChars;
-	}
+    public WordEntity(final Long id,
+                      final String lang,
+                      final String word,
+                      final String wordWithoutDiacritics,
+                      final String sortedWordChars,
+                      final String sortedWordCharsWithoutDiacritics,
+                      final Integer wordLength) {
+        this.id = id;
+        this.lang = lang;
+        this.sortedWordChars = sortedWordChars;
+        this.sortedWordCharsWithoutDiacritics = sortedWordCharsWithoutDiacritics;
+        this.word = word;
+        this.wordWithoutDiacritics = wordWithoutDiacritics;
+        this.wordLength = wordLength;
+    }
 
-	/**
-	 * @return the sortedWordCharsWithoutDiacritics
-	 */
-	public String getSortedWordCharsWithoutDiacritics() {
-		return sortedWordCharsWithoutDiacritics;
-	}
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
 
-	/**
-	 * @param sortedWordCharsWithoutDiacritics the sortedWordCharsWithoutDiacritics to set
-	 */
-	public void setSortedWordCharsWithoutDiacritics(
-			String sortedWordCharsWithoutDiacritics) {
-		this.sortedWordCharsWithoutDiacritics = sortedWordCharsWithoutDiacritics;
-	}
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	/**
-	 * @return the word
-	 */
-	public String getWord() {
-		return word;
-	}
+    /**
+     * @return the lang
+     */
+    public String getLang() {
+        return lang;
+    }
 
-	/**
-	 * @param word the word to set
-	 */
-	public void setWord(String word) {
-		this.word = word;
-	}
+    /**
+     * @param lang the lang to set
+     */
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
 
-	/**
-	 * @return the wordWithoutDiacritics
-	 */
-	public String getWordWithoutDiacritics() {
-		return wordWithoutDiacritics;
-	}
+    /**
+     * @return the sortedWordChars
+     */
+    public String getSortedWordChars() {
+        return sortedWordChars;
+    }
 
-	/**
-	 * @param wordWithoutDiacritics the wordWithoutDiacritics to set
-	 */
-	public void setWordWithoutDiacritics(String wordWithoutDiacritics) {
-		this.wordWithoutDiacritics = wordWithoutDiacritics;
-	}
+    /**
+     * @param sortedWordChars the sortedWordChars to set
+     */
+    public void setSortedWordChars(String sortedWordChars) {
+        this.sortedWordChars = sortedWordChars;
+    }
 
-	/**
-	 * @return the wordLength
-	 */
-	public Integer getWordLength() {
-		return wordLength;
-	}
+    /**
+     * @return the sortedWordCharsWithoutDiacritics
+     */
+    public String getSortedWordCharsWithoutDiacritics() {
+        return sortedWordCharsWithoutDiacritics;
+    }
 
-	/**
-	 * @param wordLength the wordLength to set
-	 */
-	public void setWordLength(Integer wordLength) {
-		this.wordLength = wordLength;
-	}
+    /**
+     * @param sortedWordCharsWithoutDiacritics the sortedWordCharsWithoutDiacritics to set
+     */
+    public void setSortedWordCharsWithoutDiacritics(
+            String sortedWordCharsWithoutDiacritics) {
+        this.sortedWordCharsWithoutDiacritics = sortedWordCharsWithoutDiacritics;
+    }
 
-	@Override
-	public String toString() {
-	   return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-	}
-	 
-	@Override
-	public int hashCode() {
-	   return HashCodeBuilder.reflectionHashCode(this);
-	}
-	 
-	@Override
-	public boolean equals(final Object other) {
-	    return EqualsBuilder.reflectionEquals(this, other);
-	}
+    /**
+     * @return the word
+     */
+    public String getWord() {
+        return word;
+    }
+
+    /**
+     * @param word the word to set
+     */
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    /**
+     * @return the wordWithoutDiacritics
+     */
+    public String getWordWithoutDiacritics() {
+        return wordWithoutDiacritics;
+    }
+
+    /**
+     * @param wordWithoutDiacritics the wordWithoutDiacritics to set
+     */
+    public void setWordWithoutDiacritics(String wordWithoutDiacritics) {
+        this.wordWithoutDiacritics = wordWithoutDiacritics;
+    }
+
+    /**
+     * @return the wordLength
+     */
+    public Integer getWordLength() {
+        return wordLength;
+    }
+
+    /**
+     * @param wordLength the wordLength to set
+     */
+    public void setWordLength(Integer wordLength) {
+        this.wordLength = wordLength;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        return EqualsBuilder.reflectionEquals(this, other);
+    }
 }

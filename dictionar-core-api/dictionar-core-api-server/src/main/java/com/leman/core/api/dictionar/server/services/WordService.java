@@ -39,7 +39,7 @@ public class WordService implements IWordService {
 
 	/**
 	 * Only for unit test
-	 * 
+	 *
 	 * @param wordRepository
 	 */
 	protected WordService(final IWordRepository wordRepository) {
@@ -52,7 +52,7 @@ public class WordService implements IWordService {
 			LOG.debug("Entering getWordEntityForRandomWord ..... ");
 		}
 		boolean test=false;
-		
+
 		Long id;
 		do {
 			id = getRandomWordId() + 1;
@@ -71,40 +71,44 @@ public class WordService implements IWordService {
 		}
 
 		final List<Word> wordList = wordRepository.getWords(sortedChars, areDiacriticsPresent);
-		final HashSet<WordEntity> anagramEntities = new HashSet<WordEntity>(wordList.size());
+		final HashSet<WordEntity> anagramEntities = new HashSet<>(wordList.size());
 		for (final Word word : wordList) {
 			anagramEntities.add(convertWordToWordEntity(word));
 		}
 
 		return anagramEntities;
 	}
-	
-	@Override
-	public Set<WordEntity> getAllAnagramListForWordAndSubWords(final String sortedChars, final Boolean areDiacriticsPresent) {
 
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Entering getAllAnagramListForWordAndSubWords ");
-		}
-		
-		
-		
-		Set<WordEntity> anagramEntities = new HashSet<WordEntity>();
-		anagramEntities = getAllAnagramListForWord(sortedChars, areDiacriticsPresent);
+    @Override
+    public Set<WordEntity> getAllAnagramListForWordAndSubWords(final List<String> sortedCharsList,
+                                                               final Boolean areDiacriticsPresent) {
 
-		return anagramEntities;
-	}
-	
-	
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Entering getAllAnagramListForWordAndSubWords ");
+            LOG.debug("it returns NULL for now");
+        }
+/*
+        final List<Word> wordList = wordRepository.getWordsAndSubWords(sortedCharsList, areDiacriticsPresent);
+        final HashSet<WordEntity> anagramEntities = new HashSet<>(wordList.size());
+        for (final Word word : wordList) {
+            anagramEntities.add(convertWordToWordEntity(word));
+        }
+*/
+
+        return null;
+    }
+
+
 	private Long getRandomWordId(){
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Entering getRandomWordId ..... ");
 		}
 		return new Long(new Random().nextInt(wordRepository.getIdOfLastElementFromTable(Language.ro).intValue()));
 	}
-	
+
 	/**
 	 * Verify if the word can be used (length greater than 3)
-	 * @param id 
+	 * @param id
 	 * @return
 	 */
 	private Boolean itsAGoodWord(final Long id){
@@ -119,9 +123,9 @@ public class WordService implements IWordService {
 		}
 		return (word.getWordLength() > 2) ? true : false;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param word
 	 * @return WordEntity
 	 */
@@ -133,43 +137,43 @@ public class WordService implements IWordService {
 				word.getSortedWordChars(), word.getSortedWordCharsWithoutDiacritics(), word.getWordLength());
 	}
 
-	
+
 	@Override
 	@DictionarPersistTx
-	public WordEntity postWord(final String word, final Integer langId) throws IOException {	
+	public WordEntity postWord(final String word, final Integer langId) throws IOException {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Entering postWord..... ");
 		}
-		
+
 		String wordWithoutDiacritics = Normalizer.normalize(word, Normalizer.Form.NFD);
 		wordWithoutDiacritics = word.replaceAll("[^\\p{ASCII}]", "");
-		
+
 		Word wordObject = new Word(Language.getByValue(langId), word, WordUtils.sortStringChars(word), wordWithoutDiacritics, WordUtils.sortStringChars(wordWithoutDiacritics));
-		
+
 		wordRepository.persist(wordObject);
 		return convertWordToWordEntity(wordObject);
-	}	
-	
-	
+	}
+
+
 //	/**
 //	 * {@inheritDoc}
 //	 */
 //	@Override
 //	@ImgdbPersistTx
-//	public WordEntity postImage(final Long managerId, final Long clientId, final Long clientImageQuotaUsed, final Long clientImageMaxUsed, final String name, final String description, final InputStream uploadedInputStream, final FormDataContentDisposition fileDetail) 
-//			throws IOException {	
+//	public WordEntity postImage(final Long managerId, final Long clientId, final Long clientImageQuotaUsed, final Long clientImageMaxUsed, final String name, final String description, final InputStream uploadedInputStream, final FormDataContentDisposition fileDetail)
+//			throws IOException {
 //		if (LOG.isDebugEnabled()) {
 //			LOG.debug("Entering postImage..... ");
 //		}
-//		
+//
 //		isNegativeAndZeroThrowIllegalArgumentException(clientId, format(ERROR_MISSING_PARAMETER, "clientId"));
 //		isNegativeAndZeroThrowIllegalArgumentException(managerId, format(ERROR_MISSING_PARAMETER, "managerId"));
-//		
-//		
+//
+//
 //		final String fileName = (fileDetail != null) ? fileDetail.getFileName() : null;
 //		if (uploadedInputStream == null && fileName == null) {
 //			throw new IllegalArgumentException("The image is missing");
-//		
+//
 //		}
 //
 //		final String extension = FilenameUtils.getExtension(fileName);
@@ -182,7 +186,7 @@ public class WordService implements IWordService {
 //
 //		final File image = new File(imageLocalTempPath + File.separator + fileName);
 //		final BufferedImage bi = getImageInfo(image, uploadedInputStream, clientImageQuotaUsed, clientImageMaxUsed, imageEntity);
-//		
+//
 //		File imageThumbnail = null;
 //		try {
 //			final ArrayList<FTPFile> ftpFiles = new ArrayList<FTPFile>();
@@ -232,7 +236,7 @@ public class WordService implements IWordService {
 //	}
 //
 //	/**
-//	 * 
+//	 *
 //	 * @param image
 //	 * @param uploadedInputStream
 //	 * @param imageEntity
@@ -280,9 +284,9 @@ public class WordService implements IWordService {
 //			LOG.debug("Entering deleteImage");
 //		}
 //		isNegativeAndZeroThrowIllegalArgumentException(clientId, format(ERROR_MISSING_PARAMETER, "clientId"));
-//		
+//
 //		final Image image = imageRepository.findByIdAndManagerId(managerIds, imageId);
-//		
+//
 //		final String ftpImageName = image.getUrl().substring(image.getUrl().lastIndexOf("/"));
 //		final String ftpImageNameThumb = image.getUrlThumb().substring(image.getUrlThumb().lastIndexOf("/"));
 //
@@ -291,7 +295,7 @@ public class WordService implements IWordService {
 //		ftpFiles.add(new FTPFile(ftpImageNameThumb));
 //
 //		FTPUpload.deleteFiles(ftpServer, ftpPort, ftpLogin, ftpPassword, ftpFiles, String.valueOf(clientId));
-//		
+//
 //		imageRepository.delete(image);
 //	}
 //
@@ -313,7 +317,7 @@ public class WordService implements IWordService {
 //	private void throwWebApplicationException(final int status,final MediaErrorType errorType) {
 //		throw new WebApplicationException(Response.status(status).entity(new ExceptionEntity(errorType.getErrorCode(), errorType.getErrorMessage())).build());
 //	}
-//	
+//
 //	/**
 //	 * Generate an image name, which is in fact a random number
 //	 *
