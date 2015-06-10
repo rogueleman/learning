@@ -37,7 +37,7 @@ public enum Language {
 
     public static Language getByLang(String lang) {
         for (Language t : Language.values()) {
-            if (t.getLang() == lang) {
+            if (t.getLang().equals(lang)) {
                 return t;
             }
         }

@@ -29,7 +29,7 @@ Tomcat can be accessed at this url : http://192.168.33.11:8080 (you can see http
 2.5 Dictionar
 
 2.5.1 Initialize database
-Some data must exists in your database (word, word_anagrams)
+Some data can exist in your database (word)
 To initialize your database, add execution permission to the script initDb.sh in your PROJECT_HOME/scripts directory and
 execute it
 chmod +x initDb.sh
