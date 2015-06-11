@@ -1,6 +1,6 @@
 1 Project
 
-examples of call
+# examples of call
 http://192.168.33.11:8080/dictionar-core/word/random
 
 http://192.168.33.11:8080/anagram/jsp/AnagramStart.jsp
@@ -10,7 +10,7 @@ http://192.168.33.11:8080/anagram/jsp/AnagramStart.jsp
 
 2.4.1 Install boxes
 vagrant box add precise32 http://files.vagrantup.com/precise32.box
-vagrant box add tomcatManu tomcatMANU_bon.box (see dropbox Smartfocus/vagrant)
+vagrant box add tomcatManu tomcatMANU_bon.box (see Manu dropbox Smartfocus/vagrant)
 
 This commands should install vagrant boxes in your home directory
 
@@ -112,32 +112,43 @@ Solution: (given by istvan-ujjmeszaros - https://github.com/mitchellh/vagrant/is
 I have to fix this issue manualy after every box update, which is really annoying.
 These are the steps I make:
 
-]$ vagrant ssh
-]$ sudo su -
+vagrant ssh
+sudo su -
 
-]$ rm -rf /etc/udev/rules.d/70-persistent-net.rules
-]$ rm -rf /etc/sysconfig/network-scripts/ifcfg-eth1
+rm -rf /etc/udev/rules.d/70-persistent-net.rules
+rm -rf /etc/sysconfig/network-scripts/ifcfg-eth1
 
-]$ vim /etc/sysconfig/network-scripts/ifcfg-eth1
+vim /etc/sysconfig/network-scripts/ifcfg-eth1
+# write in the file next lines
 DEVICE=eth1
 ONBOOT=yes
 
-]$ exit
-]$ exit
+exit
+exit
 
-]$ vagrant reload
-]$ vagrant ssh
+vagrant reload
+vagrant ssh
 
-]$ sudo su -
-]$ vim /etc/sysconfig/network-scripts/ifcfg-eth1
+sudo su -
+vim /etc/sysconfig/network-scripts/ifcfg-eth1
 
 # you will see the Vagrant generated code
 # remove what you put in there; leave the generated stuff
 
-]$ exit
-]$ exit
+exit
+exit
 
-]$ vagrant reload
+vagrant reload
+
+vagrant ssh
+
+# change autodeploy to true:
+vim /usr/local/tomcat/conf/server.xml
+# change tomcat password to something else:
+vim /usr/local/tomcat/conf/tomcat-users.xml
+
+# restart tomcat
+service tomcat restart
 
 3.3
 There are errors in the configuration of this machine. Please fix
