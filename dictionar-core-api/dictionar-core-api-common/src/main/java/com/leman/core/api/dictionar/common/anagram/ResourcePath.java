@@ -11,8 +11,6 @@ public final class ResourcePath {
     public static final String QUERY_PARAM_CHARS = "chars";
     public static final String QUERY_PARAM_ARE_DIACRITICS_PRESENTS = "areDiacriticsPresent";
 
-    public static final String QUERY_PARAM_DEFINITION_SEARCH = "definitionSearch";
-
     private ResourcePath() {
 
     }

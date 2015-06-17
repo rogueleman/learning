@@ -22,6 +22,7 @@
         <module>dictionar-core-api</module>
         <module>anagram</module>
         <module>file-header</module>
+        <module>spring-boot-start</module>
     </modules>
 
 	<properties>

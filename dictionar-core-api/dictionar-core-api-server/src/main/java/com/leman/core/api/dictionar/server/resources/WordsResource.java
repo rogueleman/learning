@@ -1,14 +1,10 @@
 package com.leman.core.api.dictionar.server.resources;
 
+import static com.leman.anagram.WordUtils.sortStringChars;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_ARE_DIACRITICS_PRESENTS;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_CHARS;
-import static com.leman.core.api.dictionar.common.anagram.ResourcePath.QUERY_PARAM_DEFINITION_SEARCH;
 import static com.leman.core.api.dictionar.common.anagram.ResourcePath.WORDS_RESOURCE_PATH;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import javax.inject.Singleton;
@@ -22,7 +18,6 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.leman.core.api.dictionar.common.anagram.entities.DefinitionEntity;
 import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
 import com.leman.core.api.dictionar.server.services.IDefinitionService;
 import com.leman.core.api.dictionar.server.services.IWordService;
@@ -53,50 +48,11 @@ public class WordsResource extends AbstractRestFulResource {
             @HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader,
             @QueryParam(QUERY_PARAM_CHARS) final String chars,
             @QueryParam(QUERY_PARAM_ARE_DIACRITICS_PRESENTS) final Boolean areDiacriticsPresent) {
-        final Set<WordEntity> anagramEntities = wordService.getAllAnagramListForWord(sortString(chars),
+        final Set<WordEntity> anagramEntities = wordService.getAllAnagramListForWord(sortStringChars(chars),
                                                                                      areDiacriticsPresent);
         return buildGetResponse(requestHeader, new GenericEntity<Set<WordEntity>>(anagramEntities) {
         });
     }
-
-   /* @GET
-    public Response getAllAnagramListForWordAndSubWords(
-            @HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader,
-            @QueryParam(QUERY_PARAM_CHARS) final String chars,
-            @QueryParam(QUERY_PARAM_ARE_DIACRITICS_PRESENTS) final Boolean areDiacriticsPresent) {
-
-        final List<String> sortedCharsList= new ArrayList<>();
-        final String sorted = sortString(chars);
-        for (int i = 0; i<sorted.length();i++) {
-            sortedCharsList.add(sorted.substring(i));
-        }
-
-        final Set<WordEntity> anagramEntities = wordService.getAllAnagramListForWordAndSubWords(sortedCharsList,
-                                                                                                areDiacriticsPresent);
-        return buildGetResponse(requestHeader, new GenericEntity<Set<WordEntity>>(anagramEntities) {
-        });
-    }*/
-
-    private String sortString(String sortedChars) {
-        final List<String> myList = new ArrayList<>(Arrays.asList(sortedChars.toLowerCase().split("")));
-        Collections.sort(myList, String.CASE_INSENSITIVE_ORDER);
-        final StringBuilder sorted = new StringBuilder();
-        for (String s : myList) {
-            sorted.append(new StringBuilder(s));
-        }
-        return sorted.toString();
-    }
-
-    @GET
-    @Path(QUERY_PARAM_DEFINITION_SEARCH)
-    public Response getWordsFromDefinition(
-            @HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader,
-            @QueryParam(QUERY_PARAM_DEFINITION_SEARCH) final String search) {
-        final Set<DefinitionEntity> definitionEntities = definitionService.getDefinitionListWithBeginingChars(search);
-        return buildGetResponse(requestHeader, new GenericEntity<Set<DefinitionEntity>>(definitionEntities) {
-        });
-    }
-
 
 //	@GET
 //	@Path(PAGE_NUMBER_REGEX_PATH)
