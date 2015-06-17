@@ -21,6 +21,10 @@ import com.leman.core.data.dictionar.jpa.repository.definition.IDefinitionReposi
 import com.leman.core.data.dictionar.jpa.repository.word.IWordRepository;
 import com.leman.core.data.dictionar.jpa.spring.transaction.DictionarReadOnlyTx;
 
+/**
+ * to be removed
+ */
+@Deprecated
 @Service("definitionService")
 @DictionarReadOnlyTx
 public class DefinitionService implements IDefinitionService {

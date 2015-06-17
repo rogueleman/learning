@@ -79,7 +79,6 @@ public enum Language {
 
     public String getLocale() {
         return this.name();
-        //return getLocaleISO(); //TODO if really locale in cookie
     }
 
     public String getLocaleISO() {
@@ -137,7 +136,6 @@ public enum Language {
         return false;
     }
 
-    //TODO compare with Collator for alphabetic order with Locale
     public static Language[] alphabeticOrderValues() {
         List<Language> list = Arrays.asList(Language.values());
         Collections.sort(list, new ComparatorI18NLocale());

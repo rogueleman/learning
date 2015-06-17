@@ -10,14 +10,18 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import com.leman.core.data.dictionar.jpa.Dictionar;
+import com.leman.core.data.dictionar.jpa.domain.definition.Definition;
+import com.leman.core.data.dictionar.jpa.domain.definition.Definition_;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
 
 import com.emailvision.data.jpa.repository.AbstractGenericRepository;
-import com.leman.core.data.dictionar.jpa.Dictionar;
-import com.leman.core.data.dictionar.jpa.domain.definition.Definition;
-import com.leman.core.data.dictionar.jpa.domain.definition.Definition_;
 
+/**
+ * to be deleted
+ */
+@Deprecated
 @Repository("definitionRepository")
 public class DefinitionRepository extends AbstractGenericRepository<Definition, Integer> implements IDefinitionRepository {
 
