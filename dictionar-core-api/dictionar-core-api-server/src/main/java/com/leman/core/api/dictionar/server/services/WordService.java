@@ -81,12 +81,12 @@ public class WordService implements IWordService {
     }
 
     @Override
-    public Set<WordEntity> getSubAnagramListForWord(String sortedChars, Boolean areDiacriticsPresent) {
+    public Set<WordEntity> getSubAnagramListForWord(final String sortedChars, final Boolean areDiacriticsPresent) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Entering getSubAnagramListForWord ");
         }
 
-        Combinations combinations = new Combinations();
+        final Combinations combinations = new Combinations();
         combinations.setInputString(sortedChars);
         combinations.getUniqueSortedWords();
 

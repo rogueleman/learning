@@ -9,11 +9,11 @@ public interface IWordService {
 
     WordEntity getWordEntityForRandomWord();
 
-    Set<WordEntity> getAnagramListForWord(String sortedChars, Boolean areDiacriticsPresent);
+    Set<WordEntity> getAnagramListForWord(final String sortedChars, final Boolean areDiacriticsPresent);
 
-    Set<WordEntity> getSubAnagramListForWord(String sortedChars, Boolean areDiacriticsPresent);
+    Set<WordEntity> getSubAnagramListForWord(final String sortedChars, final Boolean areDiacriticsPresent);
 
-    WordEntity postWord(String word, Integer lang) throws IOException;
+    WordEntity postWord(final String word, final Integer lang) throws IOException;
 
     //	/**
     //	 * Allows to get archives with parameters
