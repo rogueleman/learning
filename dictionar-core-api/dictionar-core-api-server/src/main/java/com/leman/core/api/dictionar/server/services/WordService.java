@@ -64,13 +64,28 @@ public class WordService implements IWordService {
     }
 
     @Override
-    public Set<WordEntity> getAllAnagramListForWord(final String sortedChars, final Boolean areDiacriticsPresent) {
+    public Set<WordEntity> getAnagramListForWord(final String sortedChars, final Boolean areDiacriticsPresent) {
 
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Entering getAllAnagramListForWord ");
+            LOG.debug("Entering getAnagramListForWord ");
         }
 
         final List<Word> wordList = wordRepository.getWords(sortedChars, areDiacriticsPresent);
+        final HashSet<WordEntity> wordEntities = new HashSet<>(wordList.size());
+        for (final Word word : wordList) {
+            wordEntities.add(convertWordToWordEntity(word));
+        }
+
+        return wordEntities;
+    }
+
+    @Override
+    public Set<WordEntity> getSubAnagramListForWord(List<String> sortedChars, Boolean areDiacriticsPresent) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Entering getSubAnagramListForWord ");
+        }
+
+        final List<Word> wordList = wordRepository.getWordsAndSubWords(sortedChars, areDiacriticsPresent);
         final HashSet<WordEntity> wordEntities = new HashSet<>(wordList.size());
         for (final Word word : wordList) {
             wordEntities.add(convertWordToWordEntity(word));

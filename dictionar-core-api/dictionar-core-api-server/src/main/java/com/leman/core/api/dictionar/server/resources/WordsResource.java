@@ -48,8 +48,8 @@ public class WordsResource extends AbstractRestFulResource {
             @HeaderParam(HEADER_ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeader,
             @QueryParam(QUERY_PARAM_CHARS) final String chars,
             @QueryParam(QUERY_PARAM_ARE_DIACRITICS_PRESENTS) final Boolean areDiacriticsPresent) {
-        final Set<WordEntity> anagramEntities = wordService.getAllAnagramListForWord(sortStringChars(chars),
-                                                                                     areDiacriticsPresent);
+        final Set<WordEntity> anagramEntities = wordService.getAnagramListForWord(sortStringChars(chars),
+                                                                                  areDiacriticsPresent);
         return buildGetResponse(requestHeader, new GenericEntity<Set<WordEntity>>(anagramEntities) {
         });
     }
