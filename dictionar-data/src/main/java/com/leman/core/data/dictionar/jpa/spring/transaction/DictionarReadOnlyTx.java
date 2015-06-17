@@ -10,9 +10,9 @@ import java.lang.annotation.Target;
 
 import org.springframework.transaction.annotation.Transactional;
 
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Transactional(value=TRANSACTION_MANAGER_NAME, readOnly=true, timeout=TRANSACTION_TIMEOUT)
+@Transactional(value = TRANSACTION_MANAGER_NAME, readOnly = true, timeout = TRANSACTION_TIMEOUT)
 public @interface DictionarReadOnlyTx {
 
 }

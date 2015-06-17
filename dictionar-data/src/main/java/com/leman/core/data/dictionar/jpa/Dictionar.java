@@ -40,7 +40,7 @@ public final class Dictionar {
      * The timeout for each transaction
      */
     public static final int TRANSACTION_TIMEOUT = 30000;
-    
+
     /**
      * The name of the data source.
      */
@@ -59,10 +59,10 @@ public final class Dictionar {
     public static final Database DATABASE = Database.POSTGRESQL;
 
     /**
-     * 
+     *
      */
     public static final String CACHE_NAME = "repositoryCache";
-    
+
     private Dictionar() {
         // This utility class doesn't need to be instantiated.
     }

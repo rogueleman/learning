@@ -11,6 +11,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+/**
+ * to be deleted
+ */
+@Deprecated
 @XmlType(name = DefinitionEntity.NAME)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = DefinitionEntity.NAME)

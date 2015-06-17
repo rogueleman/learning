@@ -11,9 +11,9 @@ import java.lang.annotation.Target;
 
 import org.springframework.transaction.annotation.Transactional;
 
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Transactional(propagation=REQUIRES_NEW, value=TRANSACTION_MANAGER_NAME, timeout=TRANSACTION_TIMEOUT)
+@Transactional(propagation = REQUIRES_NEW, value = TRANSACTION_MANAGER_NAME, timeout = TRANSACTION_TIMEOUT)
 public @interface DictionarPersistTx {
 
 }

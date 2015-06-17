@@ -9,6 +9,10 @@ import javax.persistence.Table;
 
 import com.emailvision.data.jpa.domain.IEntity;
 
+/**
+ * to be deleted
+ */
+@Deprecated
 @Entity(name = "DumpIds")
 @Table(name = "dumpIds")
 @Access(AccessType.FIELD)
