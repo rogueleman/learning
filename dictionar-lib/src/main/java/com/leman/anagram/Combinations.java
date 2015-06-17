@@ -1,7 +1,11 @@
 package com.leman.anagram;
 
+import static com.leman.anagram.WordUtils.sortStringChars;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Combinations {
     private final StringBuilder output = new StringBuilder();
@@ -23,7 +27,7 @@ public class Combinations {
     public Combinations() {
     }
 
-    public void combine() {
+    private void combine() {
         combine(0);
     }
 
@@ -41,17 +45,25 @@ public class Combinations {
         }
     }
 
+    public Set<String> getUniqueSortedWords(final List<String> allCombinations) {
+        combine();
+        final Set<String> sortedWords = new HashSet<>();
+        for (final String aCombination : allCombinations) {
+            sortedWords.add(sortStringChars(aCombination));
+        }
+        return sortedWords;
+    }
+
     public static void main(String args[]) {
         final Combinations combObj = new Combinations();
-        combObj.setInputString("dezoxiribonucle");
+        combObj.setInputString("dexoiribonuclei");
 
         if (combObj.getInputString().length() <= 15) {
-            combObj.combine();
-            System.out.println(combObj.getAllCombinations());
-            System.out.println(combObj.getAllCombinations().size());
+            final Set<String> uniqueSortedWords = combObj.getUniqueSortedWords(combObj.getAllCombinations());
+            System.out.println(uniqueSortedWords);
+            System.out.println(uniqueSortedWords.size());
         } else {
             System.out.println(combObj.getInputString().length());
         }
-
     }
 }
