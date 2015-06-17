@@ -45,7 +45,7 @@ public class Combinations {
         }
     }
 
-    public Set<String> getUniqueSortedWords(final List<String> allCombinations) {
+    public Set<String> getUniqueSortedWords() {
         combine();
         final Set<String> sortedWords = new HashSet<>();
         for (final String aCombination : allCombinations) {
@@ -59,7 +59,7 @@ public class Combinations {
         combObj.setInputString("dexoiribonuclei");
 
         if (combObj.getInputString().length() <= 15) {
-            final Set<String> uniqueSortedWords = combObj.getUniqueSortedWords(combObj.getAllCombinations());
+            final Set<String> uniqueSortedWords = combObj.getUniqueSortedWords();
             System.out.println(uniqueSortedWords);
             System.out.println(uniqueSortedWords.size());
         } else {

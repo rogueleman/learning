@@ -1,7 +1,6 @@
 package com.leman.core.api.dictionar.server.services;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 
 import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
@@ -12,7 +11,7 @@ public interface IWordService {
 
     Set<WordEntity> getAnagramListForWord(String sortedChars, Boolean areDiacriticsPresent);
 
-    Set<WordEntity> getSubAnagramListForWord(List<String> sortedChars, Boolean areDiacriticsPresent);
+    Set<WordEntity> getSubAnagramListForWord(String sortedChars, Boolean areDiacriticsPresent);
 
     WordEntity postWord(String word, Integer lang) throws IOException;
 

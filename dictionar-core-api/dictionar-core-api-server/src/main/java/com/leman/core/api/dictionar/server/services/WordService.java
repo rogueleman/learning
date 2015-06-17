@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import com.leman.anagram.Combinations;
 import com.leman.anagram.Language;
 import com.leman.core.api.dictionar.common.anagram.entities.WordEntity;
 import com.leman.core.data.dictionar.jpa.domain.word.Word;
@@ -80,12 +81,16 @@ public class WordService implements IWordService {
     }
 
     @Override
-    public Set<WordEntity> getSubAnagramListForWord(List<String> sortedChars, Boolean areDiacriticsPresent) {
+    public Set<WordEntity> getSubAnagramListForWord(String sortedChars, Boolean areDiacriticsPresent) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Entering getSubAnagramListForWord ");
         }
 
-        final List<Word> wordList = wordRepository.getWordsAndSubWords(sortedChars, areDiacriticsPresent);
+        Combinations combinations = new Combinations();
+        combinations.setInputString(sortedChars);
+        combinations.getUniqueSortedWords();
+
+        final List<Word> wordList = wordRepository.getWordsAndSubWords(combinations.getUniqueSortedWords(), areDiacriticsPresent);
         final HashSet<WordEntity> wordEntities = new HashSet<>(wordList.size());
         for (final Word word : wordList) {
             wordEntities.add(convertWordToWordEntity(word));

@@ -2,6 +2,7 @@ package com.leman.core.data.dictionar.jpa.repository.word;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -59,7 +60,7 @@ public class WordRepository extends AbstractGenericRepository<Word, Long> implem
     }
 
     @Override
-    public List<Word> getWordsAndSubWords(final List<String> sortedChars, final Boolean areDiacriticsPresent) {
+    public List<Word> getWordsAndSubWords(final Set<String> sortedChars, final Boolean areDiacriticsPresent) {
         final CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
         final CriteriaQuery<Word> criteriaQuery = criteriaBuilder.createQuery(Word.class);
         final Root<Word> fromWord = criteriaQuery.from(Word.class);
