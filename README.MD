@@ -56,6 +56,9 @@ vagrant ssh tomcatManu
 sudo cp /vagrant/webapps/* /usr/local/tomcat/webapps/
 
 
+2.6.4 POSTMAN
+https://www.getpostman.com/collections/b1f373ded2712a80e786
+
 3. Issues
 3.1 Authentication failure. Retrying...
 vagrant up tomcatManu
