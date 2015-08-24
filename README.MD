@@ -8,6 +8,8 @@ http://192.168.33.11:8080/anagram/jsp/AnagramStart.jsp
 
 2.4 Vagrant
 
+order of start must be postgres then tomcat. Restart tomcat if errors are still present
+
 2.4.1 Install boxes
 vagrant box add precise32 http://files.vagrantup.com/precise32.box
 vagrant box add tomcatManu tomcatMANU_bon.box (see Manu dropbox Smartfocus/vagrant)
@@ -162,3 +164,40 @@ vm:
 
 Solution:
 vagrant plugin install vagrant-hosts
+
+
+3.4
+executing vagrant up tomcatManu gives error
+The provider 'virtualbox' that was requested to back the machine
+'tomcatManu' is reporting that it isn't usable on this system. The
+reason is shown below:
+
+VirtualBox is complaining that the kernel module is not loaded. Please
+run `VBoxManage --version` or open the VirtualBox GUI to see the error
+message which should contain instructions on how to fix this error.
+
+Solution:
+sudo apt-get install linux-headers-$(uname -r)
+sudo /etc/init.d/vboxdrv setup
+
+
+3.5
+executing vagrant up postgres gives
+Bringing machine 'postgres' up with 'virtualbox' provider...
+==> postgres: Resuming suspended VM...
+==> postgres: Booting VM...
+==> postgres: Waiting for machine to boot. This may take a few minutes...
+    postgres: SSH address: 127.0.0.1:2222
+    postgres: SSH username: vagrant
+    postgres: SSH auth method: private key
+    postgres: Warning: Connection timeout. Retrying...
+    postgres: Warning: Connection timeout. Retrying...
+    postgres: Warning: Connection timeout. Retrying...
+    postgres: Warning: Connection timeout. Retrying...
+    postgres: Warning: Connection timeout. Retrying...
+    postgres: Warning: Connection timeout. Retrying...
+
+Solution:
+do power off from VirtualBox Manager
+
+3.6
