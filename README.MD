@@ -201,3 +201,7 @@ Solution:
 do power off from VirtualBox Manager
 
 3.6
+JDBC begin transaction failed (in /var/log/tomcat/dictionar-core.log)
+
+Solution:
+Restart tomcat
